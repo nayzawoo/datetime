@@ -14,3 +14,9 @@ func TestTime(t *testing.T) {
 		t.Errorf("output time should = given time")
 	}
 }
+
+func TestFormatToStdLayout(t *testing.T) {
+	assertTrue(t, FormatToStdLayout("") == "", "Format Blank")
+	assertTrue(t, FormatToStdLayout("Y") == "2006", "Format YYYY")
+	assertTrue(t, FormatToStdLayout("y") == "06", "Format YY")
+}

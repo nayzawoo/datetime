@@ -35,3 +35,24 @@ func (dt *Datetime) Second() int {
 func (dt *Datetime) Nanosecond() int {
 	return dt.Time().Nanosecond()
 }
+
+// DayOfWeek returns a number between 0 (sunday) and 6 (saturday)
+func (dt *Datetime) DayOfWeek() int {
+	return int(dt.Time().Weekday())
+}
+
+// DayOfYear returns the day of the year specified by t, in the range [1,365] for non-leap years,
+// and [1,366] in leap years.
+func (dt *Datetime) DayOfYear() int {
+	return dt.Time().YearDay()
+}
+
+// ToLayout returns formatted datetime string according to given layout.
+func (dt *Datetime) ToLayout(layout string) string {
+	return dt.Time().Format(layout)
+}
+
+// Format returns formatted datetime string according to given format
+func (dt *Datetime) Format(format string) string {
+	return dt.ToLayout(FormatToStdLayout(format))
+}
