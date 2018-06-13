@@ -6,9 +6,12 @@ import (
 )
 
 func TestFormatToStdLayout(t *testing.T) {
-	assertTrue(t, FormatToStdLayout("") == "", "Format Blank")
-	assertTrue(t, FormatToStdLayout("Y") == "2006", "Format YYYY")
-	assertTrue(t, FormatToStdLayout("y") == "06", "Format YY")
+	tm := time.Now()
+	dm := createDatatime(&tm)
+
+	assertTrue(t, dm.formatToStdLayout("") == "", "Format Blank")
+	assertTrue(t, dm.formatToStdLayout("Y") == "2006", "Format YYYY")
+	assertTrue(t, dm.formatToStdLayout("y") == "06", "Format YY")
 }
 
 func TestToLayout(t *testing.T) {

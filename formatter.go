@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-var formatToLayoutReplacer = strings.NewReplacer(
+var phpFormatReplacer = strings.NewReplacer(
 	// Day
 	"d", "02",
 	"D", "Mon",
@@ -38,13 +38,20 @@ func (dt *Datetime) ToLayout(layout string) string {
 
 // Format returns formatted datetime string according to given format
 func (dt *Datetime) Format(format string) string {
-	return dt.ToLayout(FormatToStdLayout(format))
+	return dt.ToLayout(dt.formatToStdLayout(format))
 }
 
-// FormatToStdLayout returns buildin standard time layout
-func FormatToStdLayout(format string) string {
+func (dt *Datetime) getFormatReplacer() *strings.Replacer {
+	if dt.formatReplacer == nil {
+		dt.formatReplacer = phpFormatReplacer
+	}
 
-	layout := formatToLayoutReplacer.Replace(format)
+	return dt.formatReplacer
+}
+
+func (dt *Datetime) formatToStdLayout(format string) string {
+
+	layout := dt.getFormatReplacer().Replace(format)
 
 	return layout
 }

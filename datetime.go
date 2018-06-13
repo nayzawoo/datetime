@@ -1,12 +1,14 @@
 package datetime
 
 import (
+	"strings"
 	"time"
 )
 
 // Datetime Wrapper Like Carbon, Moment, DaysJS
 type Datetime struct {
-	t *time.Time
+	t              *time.Time
+	formatReplacer *strings.Replacer
 }
 
 // New : Build
