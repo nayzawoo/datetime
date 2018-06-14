@@ -1,6 +1,7 @@
 package datetime
 
 import (
+	"strconv"
 	"strings"
 	"time"
 )
@@ -52,7 +53,13 @@ var simpleFormatReplacer = strings.NewReplacer(
 
 // ToLayout returns formatted datetime string according to given layout.
 func (dt *Datetime) ToLayout(layout string) string {
-	return dt.Time().Format(layout)
+	date := dt.Time().Format(layout)
+
+	if dt.Hour() < 10 && strings.Contains(date, "%-H") {
+		date = strings.Replace(date, "%-H", strconv.Itoa(dt.Hour()), -1)
+	}
+
+	return date
 }
 
 // Format returns formatted datetime string according to given format

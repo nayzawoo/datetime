@@ -29,6 +29,17 @@ func TestFormat(t *testing.T) {
 	assertTrue(t, dm.Format("%a %A") == "Sun Sunday", "Test: Weekday")
 }
 
+func TestNonZero24HourFormat(t *testing.T) {
+	tm := time.Date(2018, time.February, 4, 20, 7, 5, 9, time.UTC)
+	dm := createDatatime(&tm)
+
+	assertTrue(t, dm.Format("%H %H") == "20 20", "Test: %H %H")
+
+	tm = time.Date(2018, time.February, 4, 9, 7, 5, 9, time.UTC)
+	dm = createDatatime(&tm)
+	assertTrue(t, dm.Format("%H %-H") == "09 9", "Test: %H %-H")
+}
+
 func TestCommonFormat(t *testing.T) {
 	loc, _ := time.LoadLocation("EST")
 	tm := time.Date(2019, time.February, 1, 3, 45, 27, 612584*1e+3, loc)
@@ -39,6 +50,5 @@ func TestCommonFormat(t *testing.T) {
 	assertTrue(t, dm.ToRFC822ZString() == "01 Feb 19 03:45 -0500", "Test: RFC822Z")
 	assertTrue(t, dm.ToRFC2822String() == "Fri, 01 Feb 2019 03:45:27 -0500", "Test: RFC2822")
 	assertTrue(t, dm.ToRFC850String() == "Friday, 01-Feb-19 03:45:27 EST", "Test: RFC850Z")
-	// 2006-01-02T15:04:05Z07:00
 	assertTrue(t, dm.ToRFC3339String() == "2019-02-01T03:45:27-05:00", "Test: RFC3339")
 }
