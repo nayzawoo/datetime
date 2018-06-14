@@ -35,8 +35,10 @@ func TestCommonFormat(t *testing.T) {
 	dm := createDatatime(&tm)
 	assertTrue(t, dm.ToAtomString() == "2019-02-01T03:45:27-05:00", "Test: Atom")
 	assertTrue(t, dm.ToCookieString() == "Friday, 01-Feb-2019 03:45:27 EST", "Test: Cookie")
-	assertTrue(t, dm.ToRfc822String() == "01 Feb 19 03:45 EST", "Test: RFC822")
-	assertTrue(t, dm.ToRfc822ZString() == "01 Feb 19 03:45 -0500", "Test: RFC822Z")
-	assertTrue(t, dm.ToRfc2822String() == "Fri, 01 Feb 2019 03:45:27 -0500", "Test: RFC2822")
-	assertTrue(t, dm.ToRfc850String() == "Friday, 01-Feb-19 03:45:27 EST", "Test: RFC850Z")
+	assertTrue(t, dm.ToRFC822String() == "01 Feb 19 03:45 EST", "Test: RFC822")
+	assertTrue(t, dm.ToRFC822ZString() == "01 Feb 19 03:45 -0500", "Test: RFC822Z")
+	assertTrue(t, dm.ToRFC2822String() == "Fri, 01 Feb 2019 03:45:27 -0500", "Test: RFC2822")
+	assertTrue(t, dm.ToRFC850String() == "Friday, 01-Feb-19 03:45:27 EST", "Test: RFC850Z")
+	// 2006-01-02T15:04:05Z07:00
+	assertTrue(t, dm.ToRFC3339String() == "2019-02-01T03:45:27-05:00", "Test: RFC3339")
 }

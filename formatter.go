@@ -8,11 +8,11 @@ import (
 // Common Formats
 // https://carbon.nesbot.com/docs/#api-commonformats
 // http://php.net/manual/en/class.datetime.php
+
+// time format to build time layout replacer
+// time/format.go
 // https://ruby-doc.org/core-2.2.0/Time.html
 // https://docs.python.org/3/library/datetime.html
-
-// Go Time Layout:  Mon Jan 2 15:04:05 2006
-// time/format.go
 var simpleFormatReplacer = strings.NewReplacer(
 	// Year
 	"%Y", "2006",
@@ -88,27 +88,38 @@ func (dt *Datetime) ToCookieString() string {
 	return dt.Time().Format("Monday, 02-Jan-2006 15:04:05 MST")
 }
 
-// ToRfc822String returns Rfc822
+// ToRFC822String returns RFC822
 // example: 02 Jan 06 15:04 MST
-func (dt *Datetime) ToRfc822String() string {
+func (dt *Datetime) ToRFC822String() string {
 	return dt.Format(time.RFC822)
 }
 
-// ToRfc822ZString returns Rfc822, With Numeric Zone
+// ToRFC822ZString returns RFC822, With Numeric Zone
 // example: 02 Jan 06 15:04 -0700
-func (dt *Datetime) ToRfc822ZString() string {
+func (dt *Datetime) ToRFC822ZString() string {
 	return dt.Format(time.RFC822Z)
 }
 
-// ToRfc850String returns Rfc8659 Format
+// ToRFC850String returns RFC8659 Format
 // example: Monday, 02-Jan-06 15:04:05 MST
-func (dt *Datetime) ToRfc850String() string {
+func (dt *Datetime) ToRFC850String() string {
 	return dt.Format(time.RFC850)
 }
 
-// ToRfc2822String returns Rfc2822 Format
+// ToRFC2822String returns RFC2822 Format
 // example: Mon, 02 Jan 2006 15:04:05 -0700
-func (dt *Datetime) ToRfc2822String() string {
+func (dt *Datetime) ToRFC2822String() string {
 	const rfc2822Layout = "Mon, 02 Jan 2006 15:04:05 -0700"
 	return dt.Time().Format(rfc2822Layout)
 }
+
+// ToRFC3339String returns RFC3339 Format
+// 2006-01-02T15:04:05+07:00
+func (dt *Datetime) ToRFC3339String() string {
+	return dt.Time().Format("2006-01-02T15:04:05-07:00")
+}
+
+// Todo
+// RFC1123
+// RSS
+// W3C
