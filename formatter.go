@@ -4,31 +4,43 @@ import (
 	"strings"
 )
 
-var phpFormatReplacer = strings.NewReplacer(
-	// Day
-	"d", "02",
-	"D", "Mon",
-	"j", "2",
-	"l", "Monday",
+// Go Time Layout:  Mon Jan 2 15:04:05 2006
+// time/format.go
+var simpleFormatReplacer = strings.NewReplacer(
+	// Year
+	"%Y", "2006",
+	"%y", "06",
 
 	// Month
-	"F", "January",
-	"m", "01",
-	"M", "Jan",
-	"n", "1",
+	"%-m", "1",
+	"%m", "01",
+	"%b", "Jan",
+	"%B", "January",
 
-	// Year
-	"Y", "2006",
-	"y", "06",
+	// Day
+	"%-d", "2",
+	"%d", "02",
 
-	// Time
-	"g", "3",
-	"h", "03",
-	"H", "15",
-	"i", "04",
-	"s", "05",
-	"a", "pm",
-	"A", "PM",
+	// Weekday:
+	"%a", "Mon",
+	"%A", "Monday",
+
+	// Hour
+	"%H", "15",
+	"%-I", "3",
+	"%I", "03",
+
+	// Minute
+	"%-M", "4",
+	"%M", "04",
+
+	// Second
+	"%-S", "5",
+	"%S", "05",
+
+	// Meridian
+	"%p", "pm",
+	"%P", "PM",
 )
 
 // ToLayout returns formatted datetime string according to given layout.
@@ -43,7 +55,7 @@ func (dt *Datetime) Format(format string) string {
 
 func (dt *Datetime) getFormatReplacer() *strings.Replacer {
 	if dt.formatReplacer == nil {
-		dt.formatReplacer = phpFormatReplacer
+		dt.formatReplacer = simpleFormatReplacer
 	}
 
 	return dt.formatReplacer
