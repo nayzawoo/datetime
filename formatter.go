@@ -13,7 +13,7 @@ import (
 // time format to build time layout replacer
 // time/format.go
 // https://ruby-doc.org/core-2.2.0/Time.html
-// https://docs.python.org/3/library/datetime.html
+// https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
 var simpleFormatReplacer = strings.NewReplacer(
 	// Year
 	"%Y", "2006",
@@ -49,6 +49,12 @@ var simpleFormatReplacer = strings.NewReplacer(
 	// Meridian
 	"%p", "pm",
 	"%P", "PM",
+
+	// Zone
+	"%z", "-0700",
+	"%:z", "-07:00",
+	"%::z", "-07:00:00",
+	"%Z", "MST",
 )
 
 // ToLayout returns formatted datetime string according to given layout.
