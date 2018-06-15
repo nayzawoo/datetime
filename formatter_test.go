@@ -58,4 +58,6 @@ func TestCommonFormat(t *testing.T) {
 	assertTrue(t, dm.ToRFC2822String() == "Fri, 01 Feb 2019 03:45:27 -0500", "Test: RFC2822")
 	assertTrue(t, dm.ToRFC850String() == "Friday, 01-Feb-19 03:45:27 EST", "Test: RFC850Z")
 	assertTrue(t, dm.ToRFC3339String() == "2019-02-01T03:45:27-05:00", "Test: RFC3339")
+	assertTrue(t, dm.ToRFC1123String() == "Fri, 01 Feb 2019 03:45:27 EST", "Test: RFC1123")
+	assertTrue(t, dm.ToRSSString() == "Fri, 01 Feb 2019 03:45:27 EST", "Test: RSS format")
 }

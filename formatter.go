@@ -14,6 +14,7 @@ import (
 // time/format.go
 // https://ruby-doc.org/core-2.2.0/Time.html
 // https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+// https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
 var simpleFormatReplacer = strings.NewReplacer(
 	// Year
 	"%Y", "2006",
@@ -104,19 +105,19 @@ func (dt *Datetime) ToCookieString() string {
 // ToRFC822String returns RFC822
 // example: 02 Jan 06 15:04 MST
 func (dt *Datetime) ToRFC822String() string {
-	return dt.Format(time.RFC822)
+	return dt.Time().Format(time.RFC822)
 }
 
 // ToRFC822ZString returns RFC822, With Numeric Zone
 // example: 02 Jan 06 15:04 -0700
 func (dt *Datetime) ToRFC822ZString() string {
-	return dt.Format(time.RFC822Z)
+	return dt.Time().Format(time.RFC822Z)
 }
 
 // ToRFC850String returns RFC8659 Format
 // example: Monday, 02-Jan-06 15:04:05 MST
 func (dt *Datetime) ToRFC850String() string {
-	return dt.Format(time.RFC850)
+	return dt.Time().Format(time.RFC850)
 }
 
 // ToRFC2822String returns RFC2822 Format
@@ -127,12 +128,21 @@ func (dt *Datetime) ToRFC2822String() string {
 }
 
 // ToRFC3339String returns RFC3339 Format
-// 2006-01-02T15:04:05+07:00
+// example: 2006-01-02T15:04:05+07:00
+// original format: 2006-01-02T15:04:05Z07:00
 func (dt *Datetime) ToRFC3339String() string {
 	return dt.Time().Format("2006-01-02T15:04:05-07:00")
 }
 
-// Todo
-// RFC1123
-// RSS
-// W3C
+// ToRFC1123String returns RFC1123 Format
+// example: Fri, 01 Feb 2019 03:45:27 EST
+func (dt *Datetime) ToRFC1123String() string {
+	return dt.Time().Format(time.RFC1123)
+}
+
+// ToRSSString returns RSS pubDate
+// example: Fri, 01 Feb 2019 03:45:27 -0500
+// example: Sat, 24 Apr 2010 14:01:00 GMT
+func (dt *Datetime) ToRSSString() string {
+	return dt.Time().Format("Mon, 02 Jan 2006 15:04:05 MST")
+}
