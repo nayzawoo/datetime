@@ -7,7 +7,7 @@ import (
 
 func TestTime(t *testing.T) {
 	in := time.Now()
-	dt := createDatatime(&in)
+	dt := New(&in)
 	out := dt.Time()
 
 	if !out.Equal(in) {
