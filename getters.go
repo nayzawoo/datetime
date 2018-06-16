@@ -36,13 +36,13 @@ func (dt *Datetime) Nanosecond() int {
 	return dt.Time().Nanosecond()
 }
 
-// DayOfWeek returns a number between 0 (sunday) and 6 (saturday)
-func (dt *Datetime) DayOfWeek() int {
+// Weekday returns a number between 0 (sunday) and 6 (saturday)
+func (dt *Datetime) Weekday() int {
 	return int(dt.Time().Weekday())
 }
 
-// DayOfYear returns the day of the year specified by t, in the range [1,365] for non-leap years,
+// YearDay returns the day of the year specified by t, in the range [1,365] for non-leap years,
 // and [1,366] in leap years.
-func (dt *Datetime) DayOfYear() int {
+func (dt *Datetime) YearDay() int {
 	return dt.Time().YearDay()
 }

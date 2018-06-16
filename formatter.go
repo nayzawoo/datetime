@@ -42,10 +42,12 @@ var formatReplacer = strings.NewReplacer(
 	"{PM}", "PM",
 
 	// Zone
-	"{Z}", "-0700",
-	"{ZZ}", "-07:00",
-	"{ZZZ}", "MST",
-	"{ZZZZ}", "-07:00:00",
+	"{z}", "-07",
+	"{zz}", "-0700",
+	"{zzz}", "-070000",
+	"{z:}", "-07:00",
+	"{z::}", "-07:00:00",
+	"{Z}", "MST",
 )
 
 // Format returns datetime string according to given format

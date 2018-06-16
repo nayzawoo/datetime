@@ -15,6 +15,6 @@ func TestYearToNanoSecond(t *testing.T) {
 	assertTrue(t, dm.Minute() == 10, "Minute => 10")
 	assertTrue(t, dm.Second() == 5, "Second => 5")
 	assertTrue(t, dm.Nanosecond() == 9, "Nanosecond => 9")
-	assertTrue(t, dm.DayOfWeek() == 0, "Weekday => 1(Sun)")
-	assertTrue(t, dm.DayOfYear() == 35, "DayOfYear => 35")
+	assertTrue(t, dm.Weekday() == 0, "Weekday => 1(Sun)")
+	assertTrue(t, dm.YearDay() == 35, "DayOfYear => 35")
 }

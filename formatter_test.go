@@ -15,6 +15,9 @@ func TestFormat(t *testing.T) {
 	assertTrue(t, dt.Format("{HH} {H} {hh} {h}") == "20 20 08 8", "Format Test: Hour")
 	assertTrue(t, dt.Format("{mm} {m}") == "07 7", "Format Test: Minute")
 	assertTrue(t, dt.Format("{ss} {s}") == "05 5", "Format Test: Second")
+	assertTrue(t, dt.Format("{z} {zz} {zzz}") == "-05 -0500 -050000", "Format Test: TimeZone")
+	assertTrue(t, dt.Format("{z:} {z::}") == "-05:00 -05:00:00", "Format Test: TimeZone With Colon")
+	assertTrue(t, dt.Format("{pm} {PM}") == "pm PM", "Format Test: Meridian")
 }
 
 func TestNonZero24HourFormat(t *testing.T) {
