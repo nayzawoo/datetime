@@ -7,7 +7,7 @@ import (
 
 func TestYearToNanoSecond(t *testing.T) {
 	tm := time.Date(2018, time.February, 4, 20, 10, 5, 9, time.UTC)
-	dm := New(&tm)
+	dm := New(tm)
 	assertTrue(t, dm.Year() == 2018, "Year => 2018")
 	assertTrue(t, dm.Month() == 2, "Month => 2(February)")
 	assertTrue(t, dm.Day() == 4, "Day => 4")

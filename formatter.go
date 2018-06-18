@@ -51,7 +51,7 @@ var formatReplacer = strings.NewReplacer(
 )
 
 // Format returns datetime string according to given format
-func Format(t *time.Time, format string) string {
+func Format(t time.Time, format string) string {
 	date := t.Format(formatToStdLayout(format))
 
 	// format non zero padded 24hr
@@ -63,7 +63,7 @@ func Format(t *time.Time, format string) string {
 }
 
 // Format returns datetime string according to given format
-func (dt *Datetime) Format(format string) string {
+func (dt *DateTime) Format(format string) string {
 	t := dt.Time()
 	return Format(t, format)
 }
@@ -71,6 +71,13 @@ func (dt *Datetime) Format(format string) string {
 func formatToStdLayout(format string) string {
 
 	layout := formatReplacer.Replace(format)
+
+	return layout
+}
+
+func fixLayoutFor24Hour(layout string) string {
+
+	layout = strings.Replace(layout, "{H}", "15", -1)
 
 	return layout
 }
