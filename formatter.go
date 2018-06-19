@@ -63,7 +63,7 @@ func Format(t time.Time, format string) string {
 }
 
 // Format returns datetime string according to given format
-func (dt *DateTime) Format(format string) string {
+func (dt DateTime) Format(format string) string {
 	t := dt.Time()
 	return Format(t, format)
 }

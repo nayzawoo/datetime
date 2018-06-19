@@ -31,6 +31,6 @@ func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
 }
 
 // Time https://golang.org/pkg/time/#Time
-func (dt *DateTime) Time() time.Time {
+func (dt DateTime) Time() time.Time {
 	return dt.t
 }
