@@ -30,6 +30,17 @@ func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
 	return New(t), err
 }
 
+// NewFromDate -
+func NewFromDate(year, month, day int, loc *time.Location) DateTime {
+	if loc == nil {
+		loc = time.UTC
+	}
+
+	t := time.Date(year, time.Month(month), day, 0, 0, 0, 0, loc)
+
+	return New(t)
+}
+
 // Time https://golang.org/pkg/time/#Time
 func (dt DateTime) Time() time.Time {
 	return dt.t

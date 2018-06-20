@@ -42,6 +42,12 @@ func TestNewFromFormatWithDate(t *testing.T) {
 	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 12 10", "date should 2018 12 10")
 }
 
+func TestNewFromDate(t *testing.T) {
+	dt := NewFromDate(2018, 12, 10, nil)
+
+	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 12 10", "date should 2018 12 10")
+}
+
 func TestNewFromFormatWithTime(t *testing.T) {
 	dt, err := NewFromFormat("Date: {h}:{m}:{s} {pm}", "Date: 1:2:3 pm", time.UTC)
 	if err != nil {
