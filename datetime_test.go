@@ -5,21 +5,6 @@ import (
 	"time"
 )
 
-func TestTimeOutput(t *testing.T) {
-	in := time.Now()
-	dt := New(in)
-	out := dt.Time()
-
-	assertTrue(t, out.Equal(in), "output should equal given time")
-
-	in = in.AddDate(1, 0, 0)
-
-	assertTrue(t, !dt.Time().Equal(in), "output should't equal given time")
-
-	changedOutput := dt.Time().AddDate(1, 0, 0)
-	assertTrue(t, !dt.Time().Equal(changedOutput), "changedOutput should't equal given time")
-}
-
 func TestNewFromFormatWithDate(t *testing.T) {
 	// 2. short y,m,d
 	dt, err := NewFromFormat("Date: {YY} {M} {D}", "Date: 18 2 3", time.UTC)
@@ -55,4 +40,27 @@ func TestNewFromFormatWithTime(t *testing.T) {
 	}
 
 	assertTrue(t, dt.Format("{HH}:{mm}:{ss}") == "13:02:03", "test time 13:02:03")
+}
+
+func TestStartOfs(t *testing.T) {
+	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
+
+	dt := New(tTime)
+	dt.StartOfMinute()
+
+	// Start Of Minute
+	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:20:0", "start of minute")
+	assertTrue(t, dt.Nanosecond() == 0, "start of minute")
+
+	// Start Of Hour
+	dt.t = tTime
+	dt.StartOfHour()
+	assertTrue(t, dt.Format("{D} {H}:{m}:{s}") == "2 10:0:0", "start of hour")
+	assertTrue(t, dt.Nanosecond() == 0, "")
+
+	// Start Of Day
+	dt.t = tTime
+	dt.StartOfDay()
+	assertTrue(t, dt.Format("{D} {H}:{m}:{s}") == "2 0:0:0", "start of day")
+	assertTrue(t, dt.Nanosecond() == 0, "")
 }

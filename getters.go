@@ -1,5 +1,9 @@
 package datetime
 
+import (
+	"time"
+)
+
 // Year => ..2018..
 func (dt *DateTime) Year() int {
 	return dt.Time().Year()
@@ -45,4 +49,9 @@ func (dt *DateTime) Weekday() int {
 // and [1,366] in leap years.
 func (dt *DateTime) YearDay() int {
 	return dt.Time().YearDay()
+}
+
+// Time https://golang.org/pkg/time/#Time
+func (dt DateTime) Time() time.Time {
+	return dt.t
 }

@@ -18,3 +18,19 @@ func TestYearToNanoSecond(t *testing.T) {
 	assertTrue(t, dm.Weekday() == 0, "Weekday => 1(Sun)")
 	assertTrue(t, dm.YearDay() == 35, "DayOfYear => 35")
 }
+
+func TestTimeOutput(t *testing.T) {
+	in := time.Now()
+	dt := New(in)
+	out := dt.Time()
+
+	assertTrue(t, out.Equal(in), "output should equal given time")
+
+	in = in.AddDate(1, 0, 0)
+
+	assertTrue(t, !dt.Time().Equal(in), "output should't equal given time")
+
+	changedOutput := dt.Time().AddDate(1, 0, 0)
+
+	assertTrue(t, !dt.Time().Equal(changedOutput), "changedOutput should't equal given time")
+}
