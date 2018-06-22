@@ -54,7 +54,7 @@ func (dt *DateTime) setDateTime(value int, setType string) {
 	case "second", "sec":
 		s = value
 		break
-	case "min", "minute":
+	case "minute", "min":
 		m = value
 		break
 	case "hour", "hr":
@@ -68,6 +68,8 @@ func (dt *DateTime) setDateTime(value int, setType string) {
 		break
 	case "year":
 		Y = value
+	default:
+		panic("unrecognized type")
 	}
 
 	dt.t = time.Date(Y, M, D, h, m, s, ns, dt.Time().Location())

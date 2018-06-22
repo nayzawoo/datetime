@@ -42,6 +42,31 @@ func TestNewFromFormatWithTime(t *testing.T) {
 	assertTrue(t, dt.Format("{HH}:{mm}:{ss}") == "13:02:03", "test time 13:02:03")
 }
 
+func TestSetDateTime(t *testing.T) {
+	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
+
+	dt := New(tTime)
+
+	assertTrue(t, dt.Nanosecond() == 40, "setdatetime test: ns")
+	dt.setDateTime(41, "nanosecond")
+	dt.setDateTime(31, "second")
+	dt.setDateTime(21, "minute")
+	dt.setDateTime(11, "hour")
+	dt.setDateTime(3, "day")
+	dt.setDateTime(2, "month")
+	dt.setDateTime(2017, "year")
+
+	assertTrue(t, dt.Format("{YYYY}-{M}-{D} {H}:{m}:{s}") == "2017-2-3 11:21:31", "test setDateTime")
+	assertTrue(t, dt.Nanosecond() == 41, "setdatetime test: ns")
+
+	dt.setDateTime(40, "nsec")
+	dt.setDateTime(30, "sec")
+	dt.setDateTime(20, "min")
+	dt.setDateTime(10, "hr")
+	assertTrue(t, dt.Format("{H}:{m}:{s}") == "10:20:30", "test setDateTime")
+	assertTrue(t, dt.Nanosecond() == 40, "setdatetime test: ns")
+}
+
 func TestStartOfs(t *testing.T) {
 	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
 
