@@ -42,10 +42,9 @@ func NewFromDate(year, month, day int, loc *time.Location) DateTime {
 }
 
 func (dt *DateTime) setDateTime(value int, setType string) {
-	Y, M, D := dt.Time().Date()
-	h := dt.Hour()
-	m := dt.Minute()
-	s := dt.Second()
+	t := dt.Time()
+	Y, M, D := t.Date()
+	h, m, s := t.Clock()
 	ns := dt.Nanosecond()
 	switch setType {
 	case "nanosecond", "nsec":
@@ -72,7 +71,7 @@ func (dt *DateTime) setDateTime(value int, setType string) {
 		panic("unrecognized type")
 	}
 
-	dt.t = time.Date(Y, M, D, h, m, s, ns, dt.Time().Location())
+	dt.t = time.Date(Y, M, D, h, m, s, ns, t.Location())
 }
 
 // StartOfMinute returns 00s 0ns of current time
@@ -93,5 +92,19 @@ func (dt *DateTime) StartOfHour() *DateTime {
 func (dt *DateTime) StartOfDay() *DateTime {
 	dt.StartOfHour()
 	dt.setDateTime(0, "hour")
+	return dt
+}
+
+// EndOfMinute returns 59s ns of current time
+func (dt *DateTime) EndOfMinute() *DateTime {
+	dt.StartOfMinute()
+	dt.t = dt.Time().Add(time.Minute - time.Nanosecond)
+	return dt
+}
+
+// EndOfHour returns 59s ns of current time
+func (dt *DateTime) EndOfHour() *DateTime {
+	dt.StartOfHour()
+	dt.t = dt.Time().Add(time.Hour - time.Nanosecond)
 	return dt
 }

@@ -89,3 +89,19 @@ func TestStartOfs(t *testing.T) {
 	assertTrue(t, dt.Format("{D} {H}:{m}:{s}") == "2 0:0:0", "start of day")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 }
+
+func TestEndOfs(t *testing.T) {
+	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
+	dt := New(tTime)
+
+	// Start Of Minute
+	dt.EndOfMinute()
+	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:20:59", "EndOfTest: min")
+	assertTrue(t, dt.Nanosecond() == 999999999, "EndOfTest: min")
+	dt.t = tTime
+
+	dt.EndOfHour()
+	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:59:59", "EndOfTest: hr")
+	assertTrue(t, dt.Nanosecond() == 999999999, "EndOfTest: hr")
+	dt.t = tTime
+}
