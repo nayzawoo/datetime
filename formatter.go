@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+// eg layout: Mon Jan 02 15:04:05 -0700 2006
+
 var formatReplacer = strings.NewReplacer(
 	// Year
 	"{YYYY}", "2006",
@@ -80,4 +82,9 @@ func fixLayoutFor24Hour(layout string) string {
 	layout = strings.Replace(layout, "{H}", "15", -1)
 
 	return layout
+}
+
+// DateTimeString returns datetime simple format eg: 2016-01-02 15:04:05
+func (dt *DateTime) DateTimeString() string {
+	return dt.Time().Format("2006-01-02 15:04:05")
 }
