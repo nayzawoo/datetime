@@ -6,11 +6,8 @@ import (
 )
 
 func TestNewFromFormatWithDate(t *testing.T) {
-	dt, _ := NewFromFormat("Date: {YY} {M} {D}", "Date: 18 2 3", time.UTC)
-	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 02 03", "date should 2018 02 03")
-
-	dt, _ = NewFromFormat("Date: {YYYY} {MM} {DD}", "Date: 2018 12 10", time.UTC)
-	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 12 10", "date should 2018 12 10")
+	dt, _ := NewFromFormat("{YY}-{M}-{D} {H}:{m}:{s}", "18-2-3 10:20:30", time.UTC)
+	assertDate(t, dt, "2018-02-03 10:20:30")
 }
 
 func TestNewFromDate(t *testing.T) {
@@ -42,14 +39,14 @@ func TestSetDateTime(t *testing.T) {
 	dt.set(2, "month")
 	dt.set(2017, "year")
 
-	assertTrue(t, dt.Format("{YYYY}-{M}-{D} {H}:{m}:{s}") == "2017-2-3 11:21:31", "test setDateTime")
+	assertDate(t, dt, "2017-02-03 11:21:31")
 	assertTrue(t, dt.Nanosecond() == 41, "setdatetime test: ns")
 
 	dt.set(40, "nsec")
 	dt.set(30, "sec")
 	dt.set(20, "min")
 	dt.set(10, "hr")
-	assertTrue(t, dt.Format("{H}:{m}:{s}") == "10:20:30", "test setDateTime")
+	assertDate(t, dt, "2017-02-03 10:20:30")
 	assertTrue(t, dt.Nanosecond() == 40, "setdatetime test: ns")
 }
 
@@ -80,25 +77,25 @@ func TestStartOfs(t *testing.T) {
 	// hour
 	dt.t = tTime
 	dt.StartOfHour()
-	assertTrue(t, dt.DateTimeString() == "2016-02-03 10:00:00", "start of hour")
+	assertDate(t, dt, "2016-02-03 10:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// day
 	dt.t = tTime
 	dt.StartOfDay()
-	assertTrue(t, dt.DateTimeString() == "2016-02-03 00:00:00", "start of day")
+	assertDate(t, dt, "2016-02-03 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// month
 	dt.t = tTime
 	dt.StartOfMonth()
-	assertTrue(t, dt.DateTimeString() == "2016-02-01 00:00:00", "start of month")
+	assertDate(t, dt, "2016-02-01 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// year
 	dt.t = tTime
 	dt.StartOfYear()
-	assertTrue(t, dt.DateTimeString() == "2016-01-01 00:00:00", "start of month")
+	assertDate(t, dt, "2016-01-01 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 }
 
