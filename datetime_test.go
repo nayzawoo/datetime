@@ -6,24 +6,10 @@ import (
 )
 
 func TestNewFromFormatWithDate(t *testing.T) {
-	// 2. short y,m,d
-	dt, err := NewFromFormat("Date: {YY} {M} {D}", "Date: 18 2 3", time.UTC)
-
-	if err != nil {
-		t.Error(err)
-	}
-
+	dt, _ := NewFromFormat("Date: {YY} {M} {D}", "Date: 18 2 3", time.UTC)
 	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 02 03", "date should 2018 02 03")
 
-	// 1. long y,m,d
-	dt, err = NewFromFormat("Date: {YYYY} {MM} {DD}", "Date: 2018 12 10", time.UTC)
-
-	if err != nil {
-		t.Error(err)
-	}
-
-	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 12 10", "date should 2018 12 10")
-
+	dt, _ = NewFromFormat("Date: {YYYY} {MM} {DD}", "Date: 2018 12 10", time.UTC)
 	assertTrue(t, dt.Format("{YYYY} {MM} {DD}") == "2018 12 10", "date should 2018 12 10")
 }
 
@@ -71,7 +57,6 @@ func TestDaysInMonth(t *testing.T) {
 	dt := NewFromDate(2000, 1, 1, time.UTC)
 	assertTrue(t, dt.DaysInMonth() == 31, "TestDaysInMonth")
 
-	//
 	dt = NewFromDate(2000, 2, 1, time.UTC)
 	assertTrue(t, dt.DaysInMonth() == 29, "TestDaysInMonth for Leap Feb")
 
@@ -83,61 +68,78 @@ func TestDaysInMonth(t *testing.T) {
 }
 
 func TestStartOfs(t *testing.T) {
-	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
+	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 
 	dt := New(tTime)
 	dt.StartOfMinute()
 
-	// Minute
-	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:20:0", "start of minute")
+	// minute
+	assertTrue(t, dt.DateTimeString() == "2016-02-03 10:20:00", "start of minute")
 	assertTrue(t, dt.Nanosecond() == 0, "start of minute")
 
-	// Hour
+	// hour
 	dt.t = tTime
 	dt.StartOfHour()
-	assertTrue(t, dt.Format("{D} {H}:{m}:{s}") == "2 10:0:0", "start of hour")
+	assertTrue(t, dt.DateTimeString() == "2016-02-03 10:00:00", "start of hour")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
-	// Day
+	// day
 	dt.t = tTime
 	dt.StartOfDay()
-	assertTrue(t, dt.Format("{D} {H}:{m}:{s}") == "2 0:0:0", "start of day")
+	assertTrue(t, dt.DateTimeString() == "2016-02-03 00:00:00", "start of day")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
-	// Month
+	// month
 	dt.t = tTime
 	dt.StartOfMonth()
+	assertTrue(t, dt.DateTimeString() == "2016-02-01 00:00:00", "start of month")
+	assertTrue(t, dt.Nanosecond() == 0, "")
+
+	// year
+	dt.t = tTime
+	dt.StartOfYear()
 	assertTrue(t, dt.DateTimeString() == "2016-01-01 00:00:00", "start of month")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 }
 
 func TestEndOfs(t *testing.T) {
-	tTime := time.Date(2016, 1, 2, 10, 20, 30, 40, time.UTC)
+	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 	dt := New(tTime)
 
-	// minute
 	dt.EndOfMinute()
-	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:20:59", "EndOfTest: min")
-	assertTrue(t, dt.Nanosecond() == 999999999, "EndOfTest: min")
+	assertDate(t, dt, "2016-02-03 10:20:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	// hour
 	dt.t = tTime
 	dt.EndOfHour()
-	assertTrue(t, dt.Format("{h}:{m}:{s}") == "10:59:59", "EndOfTest: hr")
-	assertTrue(t, dt.Nanosecond() == 999999999, "EndOfTest: hr")
+	assertDate(t, dt, "2016-02-03 10:59:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	// day
 	dt.t = tTime
 	dt.EndOfDay()
-	assertTrue(t, dt.Format("{H}:{m}:{s}") == "23:59:59", "EndOfTest: day")
-	assertTrue(t, dt.Nanosecond() == 999999999, "EndOfTest: day")
-	dt.t = tTime
+	assertDate(t, dt, "2016-02-03 23:59:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
-	// test month
-	dt.t = time.Date(2000, 2, 1, 10, 20, 30, 40, time.UTC)
+	// month
+	dt = NewFromDate(2017, 2, 1, time.UTC)
 	dt.EndOfMonth()
-	assertTrue(t, dt.DateTimeString() == "2000-02-29 23:59:59", "EndOfTest: Month")
+	assertDate(t, dt, "2017-02-28 23:59:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
+
+	dt = NewFromDate(2000, 2, 1, time.UTC)
+	dt.EndOfMonth()
+	assertDate(t, dt, "2000-02-29 23:59:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
+
 	dt.t = dt.Time().Add(time.Nanosecond)
-	assertTrue(t, dt.DateTimeString() == "2000-03-01 00:00:00", "EndOfTest: Month")
-	dt.t = tTime
+	assertDate(t, dt, "2000-03-01 00:00:00")
+
+	// year
+	dt = NewFromDate(2017, 2, 1, time.UTC)
+	dt.EndOfYear()
+	assertDate(t, dt, "2017-12-31 23:59:59")
+	assertTrue(t, dt.Nanosecond() == 999999999, "")
+
 }

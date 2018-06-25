@@ -107,6 +107,12 @@ func (dt *DateTime) StartOfMonth() *DateTime {
 	return dt
 }
 
+// StartOfYear return
+func (dt *DateTime) StartOfYear() *DateTime {
+	dt.t = time.Date(dt.Time().Year(), 1, 1, 0, 0, 0, 0, dt.Time().Location())
+	return dt
+}
+
 // EndOfMinute returns
 func (dt *DateTime) EndOfMinute() *DateTime {
 	dt.StartOfMinute()
@@ -128,12 +134,20 @@ func (dt *DateTime) EndOfDay() *DateTime {
 	return dt
 }
 
-// EndOfMonth returns end of the month
+// EndOfMonth returns
 func (dt *DateTime) EndOfMonth() *DateTime {
 	t := dt.Time()
 	y, m, _ := t.Date()
 	// startOfNextMonth - 1nsec
 	dt.t = time.Date(y, m+1, 1, 0, 0, 0, 0, t.Location()).Add(-time.Nanosecond)
+
+	return dt
+}
+
+// EndOfYear returns
+func (dt *DateTime) EndOfYear() *DateTime {
+	t := dt.Time()
+	dt.t = time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, t.Location()).Add(-time.Nanosecond)
 
 	return dt
 }
