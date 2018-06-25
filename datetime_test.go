@@ -74,8 +74,8 @@ func TestStartOfs(t *testing.T) {
 	dt.StartOfMinute()
 
 	// minute
-	assertTrue(t, dt.DateTimeString() == "2016-02-03 10:20:00", "start of minute")
-	assertTrue(t, dt.Nanosecond() == 0, "start of minute")
+	assertDate(t, dt, "2016-02-03 10:20:00")
+	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// hour
 	dt.t = tTime
