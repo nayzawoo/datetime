@@ -130,7 +130,10 @@ func (dt *DateTime) EndOfHour() *DateTime {
 // EndOfDay returns
 func (dt *DateTime) EndOfDay() *DateTime {
 	y, m, d := dt.Time().Date()
-	dt.t = time.Date(y, m, d, 23, 59, 59, int(time.Second-time.Nanosecond), dt.Time().Location())
+
+	t := time.Date(y, m, d+1, 0, 0, 0, 0, dt.Time().Location()).Add(-time.Nanosecond)
+
+	dt.t = t
 	return dt
 }
 
