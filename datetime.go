@@ -51,6 +51,7 @@ func (dt *DateTime) set(value int, setType string) {
 	Y, M, D := t.Date()
 	h, m, s := t.Clock()
 	ns := dt.Nanosecond()
+
 	switch setType {
 	case "nanosecond", "nsec":
 		ns = value
@@ -86,28 +87,28 @@ func (dt *DateTime) StartOfMinute() *DateTime {
 	return dt
 }
 
-// StartOfHour return 00m:00s 0ns of current time
+// StartOfHour returns 00m:00s 0ns of current time
 func (dt *DateTime) StartOfHour() *DateTime {
 	dt.StartOfMinute()
 	dt.set(0, "min")
 	return dt
 }
 
-// StartOfDay return 00h:00m:00s 0ns of current time
+// StartOfDay returns 00h:00m:00s 0ns of current time
 func (dt *DateTime) StartOfDay() *DateTime {
 	dt.StartOfHour()
 	dt.set(0, "hour")
 	return dt
 }
 
-// StartOfMonth return
+// StartOfMonth returns
 func (dt *DateTime) StartOfMonth() *DateTime {
 	y, m, _ := dt.Time().Date()
 	dt.t = time.Date(y, m, 1, 0, 0, 0, 0, dt.Time().Location())
 	return dt
 }
 
-// StartOfYear return
+// StartOfYear returns
 func (dt *DateTime) StartOfYear() *DateTime {
 	dt.t = time.Date(dt.Time().Year(), 1, 1, 0, 0, 0, 0, dt.Time().Location())
 	return dt
