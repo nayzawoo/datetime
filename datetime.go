@@ -46,7 +46,7 @@ func (dt *DateTime) DaysInMonth() int {
 	return dt.EndOfMonth().Day()
 }
 
-func (dt *DateTime) set(value int, setType string) {
+func (dt *DateTime) set(value int, setType string) *DateTime {
 	t := dt.Time()
 	Y, M, D := t.Date()
 	h, m, s := t.Clock()
@@ -78,6 +78,8 @@ func (dt *DateTime) set(value int, setType string) {
 	}
 
 	dt.t = time.Date(Y, M, D, h, m, s, ns, t.Location())
+
+	return dt
 }
 
 // StartOfMinute returns 00s 0ns of current time
