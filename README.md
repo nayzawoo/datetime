@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-    datetime.Now(time.UTC)
+    datetime.Now(nil)
     datetime.NewFromFormat("{YYYY}-{M}-{D}", "2018-2-3", time.UTC)
     datetime.NewFromDate(2018, 1, 30)
 
