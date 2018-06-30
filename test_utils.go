@@ -8,7 +8,6 @@ import (
 
 var errStart = "\n\033[0;31m"
 var errEnd = "\033[0m\n"
-var br = "\n"
 
 func assertTrue(t *testing.T, result bool, message string) {
 	if result == true {
