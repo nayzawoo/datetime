@@ -163,6 +163,13 @@ func (dt *DateTime) EndOfYear() *DateTime {
 	return dt
 }
 
+// Add add given duration
+func (dt *DateTime) Add(duration time.Duration) *DateTime {
+	dt.t = dt.Time().Add(duration)
+
+	return dt
+}
+
 // AddTime returns the datetime t+-hr/min/sec.
 func (dt *DateTime) AddTime(hour, minute, second int) *DateTime {
 	y, m, d := dt.Date()
