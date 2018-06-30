@@ -14,7 +14,10 @@ go get github.com/nayzawoo/datetime
 ```go
 package main
 
-import "github.com/nayzawoo/datetime"
+import (
+    "github.com/nayzawoo/datetime"
+    "time"
+)
 
 func main() {
     datetime.Now()
