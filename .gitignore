@@ -1,0 +1,16 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.zip
+*.dylib
+vendor/*
+!vendor/vendor.json
+*.out
+*.test
+.idea
+.vscode
+scripts/
+up
+md/
