@@ -41,12 +41,14 @@ func main() {
 
     dt.AddTime(24, 60, 60) // 2018-01-02 01:01:00
     dt.SubTime(24, 60, 60) // 2018-01-01 00:00:00
+    dt.AddDate(1, 2, 3) // 2019-03-04 00:00:00
+    dt.SubDate(1, 2, 3) // 2018-01-01 00:00:00
 
     dt.Time() // https://golang.org/pkg/time/#Time
 }
 ```
 
-# Formats
+## Formats
 
 ```go
 dt.Format("{YYYY}-{MMM}-{DD}") // eg: 2018-Jan-04
