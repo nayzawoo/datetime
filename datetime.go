@@ -92,7 +92,7 @@ func (dt *DateTime) DaysInMonth() int {
 
 // StartOfMinute returns 00s 0ns of current time
 func (dt *DateTime) StartOfMinute() *DateTime {
-	dt.t = dt.t.Truncate(time.Minute)
+	dt.t = dt.Time().Truncate(time.Minute)
 	return dt
 }
 

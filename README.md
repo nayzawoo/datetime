@@ -26,9 +26,9 @@ func main() {
 
     t := time.Date(2018, 2, 3, 10, 20, 30, 0, time.UTC)
     dt := datetime.New(t)
-    dt.StartOfMinute() // 2018-02-28 23:59:00
-    dt.StartOfHour() // 2018-02-28 23:00:00
-    dt.StartOfDay() // 2018-02-28 00:00:00
+    dt.StartOfMinute() // 2018-02-03 10:20:00
+    dt.StartOfHour() // 2018-02-03 10:00:00
+    dt.StartOfDay() // 2018-02-03 00:00:00
     dt.StartOfMonth() // 2018-02-01 00:00:00
     dt.StartOfYear() // 2018-01-01 00:00:00
 
