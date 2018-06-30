@@ -5,6 +5,12 @@ Date and Time For Go(Under Development)
 [![codecov](https://codecov.io/gh/nayzawoo/datetime/branch/master/graph/badge.svg)](https://codecov.io/gh/nayzawoo/datetime)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nayzawoo/datetime)](https://goreportcard.com/report/github.com/nayzawoo/datetime)
 
+## Installation
+
+```
+go get github.com/nayzawoo/datetime
+```
+
 ```go
 package main
 
@@ -82,3 +88,8 @@ dt.Format("{YYYY}-{MMM}-{DD}") // eg: 2018-Jan-04
 | z: | Timezone | -07:00 |
 | z:: | Timezone | -07:00:00 |
 | Z | Timezone | UTC |
+
+
+## License
+
+[The MIT License (MIT)](https://raw.githubusercontent.com/nayzawoo/datetime/master/LICENSE)
