@@ -52,7 +52,9 @@ func main() {
     dt.SubTime(24, 60, 60) // 2018-01-01 00:00:00
     dt.AddDate(1, 2, 3) // 2019-03-04 00:00:00
     dt.SubDate(1, 2, 3) // 2018-01-01 00:00:00
-	dt.Clock() // 0, 0, 0	dt.Date() // 2018, January, 1
+	dt.Clock() // 0, 0, 0
+	dt.Date() // 2018, January, 1
+
     dt.Time() // https://golang.org/pkg/time/#Time
 }
 ```
