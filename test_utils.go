@@ -20,7 +20,7 @@ func assertTrue(t *testing.T, result bool, message string) {
 	t.Errorf("%s[Error] %s%s:%d%s", errStart, message+"\n", fn, line, errEnd)
 }
 
-func assertDateTime(t *testing.T, dt DateTime, datetimeString string) {
+func assertDateTime(t *testing.T, dt *DateTime, datetimeString string) {
 	_, f, line, _ := runtime.Caller(1)
 
 	if dt.DateTimeString() == datetimeString {

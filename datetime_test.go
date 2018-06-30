@@ -19,6 +19,15 @@ func TestNow(t *testing.T) {
 	assertTrue(t, !HasTestNow(), "")
 	dt = Now(nil)
 	assertDateTime(t, dt, time.Now().Format("2006-01-02 15:04:05"))
+
+	newYork, _ := time.LoadLocation("America/New_York")
+
+	local := Now(nil).StartOfMinute()
+	utc := Now(time.UTC).StartOfMinute()
+	newYorkTime := Now(newYork).StartOfMinute()
+	assertTrue(t, local.Eq(utc), "")
+	assertTrue(t, local.Eq(utc), "")
+	assertTrue(t, utc.Eq(newYorkTime), "")
 }
 
 func TestCopy(t *testing.T) {

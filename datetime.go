@@ -16,21 +16,25 @@ type DateTime struct {
 }
 
 // New : Build
-func New(t time.Time) DateTime {
-	dt := DateTime{
+func New(t time.Time) *DateTime {
+	dt := &DateTime{
 		t: t,
 	}
 
 	return dt
 }
 
-// Now returns the current time.
-func Now(loc *time.Location) DateTime {
+// Now returns the current time in given location or local time
+func Now(loc *time.Location) *DateTime {
 	var t time.Time
 	if HasTestNow() {
 		t = *testNow
 	} else {
-		t = time.Now()
+		if loc == nil {
+			t = time.Now()
+		} else {
+			t = time.Now().In(loc)
+		}
 	}
 
 	return New(t)
@@ -52,7 +56,7 @@ func ResetTestNow() {
 }
 
 // NewFromFormat parses date and returns DatetimeObject
-func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
+func NewFromFormat(format, value string, loc *time.Location) (*DateTime, error) {
 	layout := formatToStdLayout(format)
 	layout = fixLayoutFor24Hour(layout)
 
@@ -62,7 +66,7 @@ func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
 }
 
 // NewFromDate -
-func NewFromDate(year, month, day int, loc *time.Location) DateTime {
+func NewFromDate(year, month, day int, loc *time.Location) *DateTime {
 	if loc == nil {
 		loc = time.UTC
 	}
@@ -73,16 +77,16 @@ func NewFromDate(year, month, day int, loc *time.Location) DateTime {
 }
 
 // Copy return copy of DateTime
-func (dt DateTime) Copy() DateTime {
+func (dt *DateTime) Copy() *DateTime {
 	return New(dt.Time())
 }
 
-func (dt DateTime) String() string {
+func (dt *DateTime) String() string {
 	return dt.DateTimeString()
 }
 
 // DaysInMonth returns the number of days in a current months
-func (dt DateTime) DaysInMonth() int {
+func (dt *DateTime) DaysInMonth() int {
 	return dt.EndOfMonth().Day()
 }
 
@@ -195,6 +199,6 @@ func (dt *DateTime) SubDate(years int, months int, days int) *DateTime {
 
 // Eq return true if they are same
 // Alias of go built in Equal
-func (dt DateTime) Eq(datetime DateTime) bool {
+func (dt *DateTime) Eq(datetime *DateTime) bool {
 	return dt.Time().Equal(datetime.Time())
 }
