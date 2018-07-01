@@ -170,23 +170,44 @@ func (dt *DateTime) Add(duration time.Duration) *DateTime {
 	return dt
 }
 
-// AddSeconds returns the time t+d*time.Second.
-func (dt *DateTime) AddSeconds(hours int) *DateTime {
-	dt.t = dt.Time().Add(time.Duration(hours) * time.Second)
+// AddSeconds returns the datetime t+d*time.Second.
+func (dt *DateTime) AddSeconds(seconds int) *DateTime {
+	dt.t = dt.Time().Add(time.Duration(seconds) * time.Second)
 
 	return dt
 }
 
-// AddMinutes returns the time t+d*time.Minute.
+// AddMinutes returns the datetime t+d*time.Minute.
 func (dt *DateTime) AddMinutes(minutes int) *DateTime {
 	dt.t = dt.Time().Add(time.Duration(minutes) * time.Minute)
 
 	return dt
 }
 
-// AddHours returns the time t+d*time.Hour.
+// AddHours returns the datetime t+d*time.Hour.
 func (dt *DateTime) AddHours(hours int) *DateTime {
 	dt.t = dt.Time().Add(time.Duration(hours) * time.Hour)
+
+	return dt
+}
+
+// AddDays returns the datetime t+ days.
+func (dt *DateTime) AddDays(days int) *DateTime {
+	dt.AddDate(0, 0, days)
+
+	return dt
+}
+
+// AddMonths returns the datetime t+ months.
+func (dt *DateTime) AddMonths(months int) *DateTime {
+	dt.AddDate(0, months, 0)
+
+	return dt
+}
+
+// AddYears returns the datetime t+ years.
+func (dt *DateTime) AddYears(years int) *DateTime {
+	dt.AddDate(years, 0, 0)
 
 	return dt
 }
