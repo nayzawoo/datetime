@@ -47,17 +47,18 @@ func main() {
     dt.SubDate(1, 2, 3) // 2018-01-01 00:05:15
 
 
-    dt.DateTimeString() // 2018-01-01 00:05:15
+dt = datetime.New(t)
+    dt.DateTimeString() // 2018-02-03 10:20:30
     dt.Year() // 2018
-    dt.Month() // 1
-    dt.Day() // 1
-    dt.Hour() // 0
-    dt.Minute() // 5
-    dt.Second() // 15
-    dt.Nanosecond() // 0
-    dt.Weekday() // 1
-    dt.Clock() // [0 5 15]
-    dt.Date() // [2018 January 1]
+    dt.Month() // 2
+    dt.Day() // 3
+    dt.Hour() // 10
+    dt.Minute() // 20
+    dt.Second() // 30
+    dt.Nanosecond() // 40
+    dt.Weekday() // 6
+    dt.Clock() // [10 20 30]
+    dt.Date() // [2018 February 3]
 
 
     dt.Time() // https://golang.org/pkg/time/#Time
