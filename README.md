@@ -32,20 +32,20 @@ func main() {
     dt.EndOfMonth() // 2018-02-28 23:59:59
     dt.EndOfYear() // 2018-12-31 23:59:59
 
-
     dt.StartOfMinute() // 2018-12-31 23:59:00
     dt.StartOfHour() // 2018-12-31 23:00:00
     dt.StartOfDay() // 2018-12-31 00:00:00
     dt.StartOfMonth() // 2018-12-01 00:00:00
     dt.StartOfYear() // 2018-01-01 00:00:00
 
-
     dt.Add(time.Second * 10) // 2018-01-01 00:00:10
     dt.AddTime(24, 10, 10) // 2018-01-02 00:10:20
     dt.SubTime(10, 5, 5) // 2018-01-01 00:05:15
     dt.AddDate(1, 2, 3) // 2019-03-04 00:05:15
     dt.SubDate(1, 2, 3) // 2018-01-01 00:05:15
-
+    dt.AddSeconds(10) // 2018-01-01 00:05:25
+    dt.AddMinutes(10) // 2018-01-01 00:15:25
+    dt.AddHours(10) // 2018-01-01 10:15:25
 
     dt = datetime.New(t)
     dt.DateTimeString() // 2018-02-03 10:20:30
@@ -60,10 +60,10 @@ func main() {
     dt.Clock() // [10 20 30]
     dt.Date() // [2018 February 3]
 
-
     dt.Time() // https://golang.org/pkg/time/#Time
 }
 ```
+
 ## Formats
 
 ```go
@@ -98,7 +98,6 @@ dt.Format("{YYYY}-{MMM}-{DD}") // eg: 2018-Jan-04
 | z: | Timezone | -07:00 |
 | z:: | Timezone | -07:00:00 |
 | Z | Timezone | UTC |
-
 
 ## License
 

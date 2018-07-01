@@ -170,6 +170,27 @@ func (dt *DateTime) Add(duration time.Duration) *DateTime {
 	return dt
 }
 
+// AddSeconds returns the time t+d*time.Second.
+func (dt *DateTime) AddSeconds(hours int) *DateTime {
+	dt.t = dt.Time().Add(time.Duration(hours) * time.Second)
+
+	return dt
+}
+
+// AddMinutes returns the time t+d*time.Minute.
+func (dt *DateTime) AddMinutes(minutes int) *DateTime {
+	dt.t = dt.Time().Add(time.Duration(minutes) * time.Minute)
+
+	return dt
+}
+
+// AddHours returns the time t+d*time.Hour.
+func (dt *DateTime) AddHours(hours int) *DateTime {
+	dt.t = dt.Time().Add(time.Duration(hours) * time.Hour)
+
+	return dt
+}
+
 // AddTime returns the datetime t+-hr/min/sec.
 func (dt *DateTime) AddTime(hour, minute, second int) *DateTime {
 	y, m, d := dt.Date()
