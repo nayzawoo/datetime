@@ -170,6 +170,13 @@ func (dt *DateTime) Add(duration time.Duration) *DateTime {
 	return dt
 }
 
+// Sub returns the datetime - duration
+func (dt *DateTime) Sub(duration time.Duration) *DateTime {
+	dt.Add(-duration)
+
+	return dt
+}
+
 // AddSeconds returns the datetime t+d*time.Second.
 func (dt *DateTime) AddSeconds(seconds int) *DateTime {
 	dt.t = dt.Time().Add(time.Duration(seconds) * time.Second)
