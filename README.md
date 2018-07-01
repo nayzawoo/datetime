@@ -26,40 +26,38 @@ func main() {
 
     t := time.Date(2018, 2, 3, 10, 20, 30, 40, time.UTC)
     dt := datetime.New(t)
-
-
-    dt.StartOfMinute() // 2018-02-03 10:20:00
-    dt.StartOfHour() // 2018-02-03 10:00:00
-    dt.StartOfDay() // 2018-02-03 00:00:00
-    dt.StartOfMonth() // 2018-02-01 00:00:00
-    dt.StartOfYear() // 2018-01-01 00:00:00
-
-
-    dt.EndOfMinute() // 2018-01-01 00:00:59
-    dt.EndOfHour() // 2018-01-01 00:59:59
-    dt.EndOfDay() // 2018-01-01 23:59:59
-    dt.EndOfMonth() // 2018-01-31 23:59:59
+    dt.EndOfMinute() // 2018-02-03 10:20:59
+    dt.EndOfHour() // 2018-02-03 10:59:59
+    dt.EndOfDay() // 2018-02-03 23:59:59
+    dt.EndOfMonth() // 2018-02-28 23:59:59
     dt.EndOfYear() // 2018-12-31 23:59:59
 
 
-    dt.DateTimeString() // 2018-12-31 23:59:59
-    dt.Year() // 2018
-    dt.Month() // 12
-    dt.Day() // 31
-    dt.Hour() // 23
-    dt.Minute() // 59
-    dt.Second() // 59
-    dt.Nanosecond() // 999999999
-    dt.Weekday() // 1
-    dt.Clock() // 23 59 59
-    dt.Date() // 2018 December 31
+    dt.StartOfMinute() // 2018-12-31 23:59:00
+    dt.StartOfHour() // 2018-12-31 23:00:00
+    dt.StartOfDay() // 2018-12-31 00:00:00
+    dt.StartOfMonth() // 2018-12-01 00:00:00
+    dt.StartOfYear() // 2018-01-01 00:00:00
 
 
-    dt.AddTime(24, 60, 60) // 2018-01-02 01:01:00
-    dt.SubTime(24, 60, 60) // 2018-01-01 00:00:00
-    dt.AddDate(1, 2, 3) // 2019-03-04 00:00:00
-    dt.SubDate(1, 2, 3) // 2018-01-01 00:00:00
     dt.Add(time.Second * 10) // 2018-01-01 00:00:10
+    dt.AddTime(24, 10, 10) // 2018-01-02 00:10:20
+    dt.SubTime(10, 5, 5) // 2018-01-01 00:05:15
+    dt.AddDate(1, 2, 3) // 2019-03-04 00:05:15
+    dt.SubDate(1, 2, 3) // 2018-01-01 00:05:15
+
+
+    dt.DateTimeString() // 2018-01-01 00:05:15
+    dt.Year() // 2018
+    dt.Month() // 1
+    dt.Day() // 1
+    dt.Hour() // 0
+    dt.Minute() // 5
+    dt.Second() // 15
+    dt.Nanosecond() // 0
+    dt.Weekday() // 1
+    dt.Clock() // [0 5 15]
+    dt.Date() // [2018 January 1]
 
 
     dt.Time() // https://golang.org/pkg/time/#Time
