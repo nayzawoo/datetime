@@ -47,7 +47,7 @@ func main() {
     dt.SubDate(1, 2, 3) // 2018-01-01 00:05:15
 
 
-dt = datetime.New(t)
+    dt = datetime.New(t)
     dt.DateTimeString() // 2018-02-03 10:20:30
     dt.Year() // 2018
     dt.Month() // 2
