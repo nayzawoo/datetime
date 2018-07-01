@@ -188,6 +188,24 @@ func TestAddSubTime(t *testing.T) {
 
 	dt.AddYears(1)
 	assertDateTime(t, dt, "2017-03-04 10:20:40")
+
+	dt.SubSeconds(10)
+	assertDateTime(t, dt, "2017-03-04 10:20:30")
+
+	dt.SubMinutes(10)
+	assertDateTime(t, dt, "2017-03-04 10:10:30")
+
+	dt.SubHours(10)
+	assertDateTime(t, dt, "2017-03-04 00:10:30")
+
+	dt.SubDays(1)
+	assertDateTime(t, dt, "2017-03-03 00:10:30")
+
+	dt.SubMonths(1)
+	assertDateTime(t, dt, "2017-02-03 00:10:30")
+
+	dt.SubYears(1)
+	assertDateTime(t, dt, "2016-02-03 00:10:30")
 }
 
 func TestAddSubDate(t *testing.T) {

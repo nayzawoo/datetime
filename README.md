@@ -46,9 +46,15 @@ func main() {
     dt.AddSeconds(10) // 2018-01-01 00:05:25
     dt.AddMinutes(10) // 2018-01-01 00:15:25
     dt.AddHours(10) // 2018-01-01 10:15:25
-    dt.AddDays(1) // 2018-01-02 10:15:25
-    dt.AddMonths(1) // 2018-02-02 10:15:25
-    dt.AddYears(1) // 2019-02-02 10:15:25
+    dt.SubSeconds(10) // 2018-01-01 10:15:15
+    dt.SubMinutes(10) // 2018-01-01 10:05:15
+    dt.SubHours(10) // 2018-01-01 00:05:15
+    dt.AddDays(1) // 2018-01-02 00:05:15
+    dt.AddMonths(1) // 2018-02-02 00:05:15
+    dt.AddYears(1) // 2019-02-02 00:05:15
+    dt.SubDays(1) // 2019-02-01 00:05:15
+    dt.SubMonths(1) // 2019-01-01 00:05:15
+    dt.SubYears(1) // 2018-01-01 00:05:15
 
     dt = datetime.New(t)
     dt.DateTimeString() // 2018-02-03 10:20:30
