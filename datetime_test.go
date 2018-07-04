@@ -223,7 +223,7 @@ func TestAddSubDate(t *testing.T) {
 	assertDateTime(t, dt, "2016-02-03 10:20:30")
 }
 
-func TestEqual(t *testing.T) {
+func TestComparisons(t *testing.T) {
 	dt := NewFromDate(2017, 2, 1, time.UTC)
 
 	// New York => -05:00
@@ -234,4 +234,14 @@ func TestEqual(t *testing.T) {
 
 	dt.AddTime(5, 0, 0)
 	assertTrue(t, dt.Eq(dt2), "")
+
+	// Lt
+	y2000 := NewFromDate(2000, 1, 1, time.UTC)
+	y2001 := NewFromDate(2001, 1, 1, time.UTC)
+
+	assertTrue(t, y2000.Lt(y2001), "")
+	assertTrue(t, y2000.Lte(y2000), "")
+
+	assertTrue(t, y2001.Gt(y2000), "")
+	assertTrue(t, y2001.Gte(y2001), "")
 }

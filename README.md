@@ -3,8 +3,6 @@
 [![codecov](https://codecov.io/gh/nayzawoo/datetime/branch/master/graph/badge.svg)](https://codecov.io/gh/nayzawoo/datetime)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nayzawoo/datetime)](https://goreportcard.com/report/github.com/nayzawoo/datetime)
 
-Date and Time For Go(Under Development)
-
 ## Installation
 
 ```
@@ -22,10 +20,30 @@ import (
 func main() {
     datetime.Now(nil)
     datetime.NewFromFormat("{YYYY}-{M}-{D}", "2018-2-3", time.UTC)
-    datetime.NewFromDate(2018, 2, 3)
+    year2000 := datetime.NewFromDate(2000, 1, 1, time.UTC)
+    year3000 := datetime.NewFromDate(3000, 1, 1, time.UTC)
 
     t := time.Date(2018, 2, 3, 10, 20, 30, 40, time.UTC)
     dt := datetime.New(t)
+
+    dt.DateTimeString() // 2018-02-03 10:20:30
+    dt.Year() // 2018
+    dt.Month() // 2
+    dt.Day() // 3
+    dt.Hour() // 10
+    dt.Minute() // 20
+    dt.Second() // 30
+    dt.Nanosecond() // 40
+    dt.Weekday() // 6
+    year2000.Eq(year2000) // true
+    year2000.Lt(year2000) // false
+    year2000.Lte(year2000) // true
+    year3000.Gt(year2000) // true
+    year3000.Gte(year2000) // true
+    dt.Clock() // [10 20 30]
+    dt.Date() // [2018 February 3]
+    dt.Time() // https://golang.org/pkg/time/#Time
+
     dt.EndOfMinute() // 2018-02-03 10:20:59
     dt.EndOfHour() // 2018-02-03 10:59:59
     dt.EndOfDay() // 2018-02-03 23:59:59
@@ -57,20 +75,6 @@ func main() {
     dt.AddYears(1) // 2019-01-01 00:00:00
     dt.SubYears(1) // 2018-01-01 00:00:00
 
-    dt = datetime.New(t)
-    dt.DateTimeString() // 2018-02-03 10:20:30
-    dt.Year() // 2018
-    dt.Month() // 2
-    dt.Day() // 3
-    dt.Hour() // 10
-    dt.Minute() // 20
-    dt.Second() // 30
-    dt.Nanosecond() // 40
-    dt.Weekday() // 6
-    dt.Clock() // [10 20 30]
-    dt.Date() // [2018 February 3]
-
-    dt.Time() // https://golang.org/pkg/time/#Time
 }
 ```
 

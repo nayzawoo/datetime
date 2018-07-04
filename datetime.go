@@ -76,7 +76,7 @@ func NewFromDate(year, month, day int, loc *time.Location) *DateTime {
 	return New(t)
 }
 
-// Copy return copy of DateTime
+// Copy return new datetime
 func (dt *DateTime) Copy() *DateTime {
 	return New(dt.Time())
 }
@@ -295,8 +295,27 @@ func (dt *DateTime) SubDate(years int, months int, days int) *DateTime {
 // Comparison
 // ===========
 
-// Eq return true if they are same
-// Alias of go built in Equal
-func (dt *DateTime) Eq(datetime *DateTime) bool {
-	return dt.Time().Equal(datetime.Time())
+// Eq reports whether t and u represent the same time instant.
+func (dt *DateTime) Eq(u *DateTime) bool {
+	return dt.Time().Equal(u.Time())
+}
+
+// Lt reports whether the datetime is before u
+func (dt *DateTime) Lt(u *DateTime) bool {
+	return dt.Time().Before(u.Time())
+}
+
+// Lte reports whether the datetime is before or same time instant.
+func (dt *DateTime) Lte(u *DateTime) bool {
+	return dt.Time().Equal(u.Time()) || dt.Time().Before(u.Time())
+}
+
+// Gt reports whether the datetime is after u.
+func (dt *DateTime) Gt(u *DateTime) bool {
+	return dt.Time().After(u.Time())
+}
+
+// Gte reports whether the datetime is after u or same time instant
+func (dt *DateTime) Gte(u *DateTime) bool {
+	return dt.Time().Equal(u.Time()) || dt.Time().After(u.Time())
 }
