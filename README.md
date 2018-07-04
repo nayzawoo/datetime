@@ -35,14 +35,15 @@ func main() {
     dt.Second() // 30
     dt.Nanosecond() // 40
     dt.Weekday() // 6
+    dt.Clock() // [10 20 30]
+    dt.Date() // [2018 February 3]
+    dt.Time() // https://golang.org/pkg/time/#Time
+
     year2000.Eq(year2000) // true
     year2000.Lt(year2000) // false
     year2000.Lte(year2000) // true
     year3000.Gt(year2000) // true
     year3000.Gte(year2000) // true
-    dt.Clock() // [10 20 30]
-    dt.Date() // [2018 February 3]
-    dt.Time() // https://golang.org/pkg/time/#Time
 
     dt.EndOfMinute() // 2018-02-03 10:20:59
     dt.EndOfHour() // 2018-02-03 10:59:59
