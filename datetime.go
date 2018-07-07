@@ -85,11 +85,6 @@ func (dt *DateTime) String() string {
 	return dt.DateTimeString()
 }
 
-// DaysInMonth returns the number of days in a current months
-func (dt *DateTime) DaysInMonth() int {
-	return dt.EndOfMonth().Day()
-}
-
 // StartOfMinute returns 00s 0ns of current time
 func (dt *DateTime) StartOfMinute() *DateTime {
 	dt.t = dt.Time().Truncate(time.Minute)

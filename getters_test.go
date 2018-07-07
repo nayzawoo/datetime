@@ -52,3 +52,20 @@ func TestTimeOutput(t *testing.T) {
 
 	assertTrue(t, !dt.Time().Equal(changedOutput), "changedOutput should't equal given time")
 }
+
+func TestDaysInYearMonth(t *testing.T) {
+	dt := NewFromDate(2000, 1, 1, time.UTC)
+	assertTrue(t, dt.DaysInMonth() == 31, "TestDaysInMonth")
+
+	dt = NewFromDate(2000, 2, 1, time.UTC)
+	assertTrue(t, dt.DaysInMonth() == 29, "TestDaysInMonth for Leap Feb")
+
+	dt = NewFromDate(2001, 2, 1, time.UTC)
+	assertTrue(t, dt.DaysInMonth() == 28, "TestDaysInMonth")
+
+	dt = NewFromDate(2001, 4, 1, time.UTC)
+	assertTrue(t, dt.DaysInMonth() == 30, "TestDaysInMonth")
+
+	dt = NewFromDate(2000, 2, 1, time.UTC)
+	assertTrue(t, dt.DaysInYear() == 366, "TestDaysInYear")
+}

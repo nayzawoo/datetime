@@ -64,20 +64,6 @@ func TestNewFromFormatWithTime(t *testing.T) {
 	assertTrue(t, dt.Format("{HH}:{mm}:{ss}") == "13:02:03", "test time 13:02:03")
 }
 
-func TestDaysInMonth(t *testing.T) {
-	dt := NewFromDate(2000, 1, 1, time.UTC)
-	assertTrue(t, dt.DaysInMonth() == 31, "TestDaysInMonth")
-
-	dt = NewFromDate(2000, 2, 1, time.UTC)
-	assertTrue(t, dt.DaysInMonth() == 29, "TestDaysInMonth for Leap Feb")
-
-	dt = NewFromDate(2001, 2, 1, time.UTC)
-	assertTrue(t, dt.DaysInMonth() == 28, "TestDaysInMonth")
-
-	dt = NewFromDate(2001, 4, 1, time.UTC)
-	assertTrue(t, dt.DaysInMonth() == 30, "TestDaysInMonth")
-}
-
 func TestStartOfs(t *testing.T) {
 	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 

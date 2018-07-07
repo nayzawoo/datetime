@@ -35,6 +35,9 @@ func main() {
     dt.Second() // 30
     dt.Nanosecond() // 40
     dt.Weekday() // 6
+    dt.YearDay() // 34
+    dt.DaysInMonth() // 28
+    dt.DaysInYear() // 365
     dt.Clock() // [10 20 30]
     dt.Date() // [2018 February 3]
     dt.Time() // https://golang.org/pkg/time/#Time
