@@ -231,3 +231,11 @@ func TestComparisons(t *testing.T) {
 	assertTrue(t, y2001.Gt(y2000), "")
 	assertTrue(t, y2001.Gte(y2001), "")
 }
+
+func TestDiffs(t *testing.T) {
+	dt := NewFromDate(2017, 2, 1, time.UTC)
+
+	tenMinLater := NewFromDate(2017, 2, 1, time.UTC).AddMinutes(10)
+
+	assertTrue(t, dt.Diff(tenMinLater).Minutes() == -10, "")
+}

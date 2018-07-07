@@ -287,7 +287,7 @@ func (dt *DateTime) SubDate(years int, months int, days int) *DateTime {
 }
 
 // ===========
-// Comparison
+// Comparison & difference
 // ===========
 
 // Eq reports whether t and u represent the same time instant.
@@ -313,4 +313,11 @@ func (dt *DateTime) Gt(u *DateTime) bool {
 // Gte reports whether the datetime is after u or same time instant
 func (dt *DateTime) Gte(u *DateTime) bool {
 	return dt.Time().Equal(u.Time()) || dt.Time().After(u.Time())
+}
+
+// Diff returns the duration t-u. If the result exceeds the maximum (or minimum)
+// value that can be stored in a Duration, the maximum (or minimum) duration
+// will be returned.
+func (dt *DateTime) Diff(u *DateTime) time.Duration {
+	return dt.Time().Sub(u.Time())
 }

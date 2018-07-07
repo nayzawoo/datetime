@@ -47,6 +47,7 @@ func main() {
     year2000.Lte(year2000) // true
     year3000.Gt(year2000) // true
     year3000.Gte(year2000) // true
+    year3000.Diff(year2000) // time.Duration
 
     dt.EndOfMinute() // 2018-02-03 10:20:59
     dt.EndOfHour() // 2018-02-03 10:59:59
