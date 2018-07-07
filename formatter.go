@@ -54,6 +54,10 @@ var formatReplacer = strings.NewReplacer(
 
 // Format returns datetime string according to given format
 func Format(t time.Time, format string) string {
+	if isStdFormat(format) {
+		return t.Format(format)
+	}
+
 	date := t.Format(formatToStdLayout(format))
 
 	// format non zero padded 24hr
@@ -87,4 +91,27 @@ func fixLayoutFor24Hour(layout string) string {
 // DateTimeString returns datetime simple format eg: 2016-01-02 15:04:05
 func (dt *DateTime) DateTimeString() string {
 	return dt.Time().Format("2006-01-02 15:04:05")
+}
+
+func isStdFormat(format string) bool {
+	switch format {
+	case time.ANSIC,
+		time.UnixDate,
+		time.RubyDate,
+		time.RFC822,
+		time.RFC822Z,
+		time.RFC850,
+		time.RFC1123,
+		time.RFC1123Z,
+		time.RFC3339,
+		time.RFC3339Nano,
+		time.Kitchen,
+		time.Stamp,
+		time.StampMilli,
+		time.StampMicro,
+		time.StampNano:
+		return true
+	}
+
+	return false
 }

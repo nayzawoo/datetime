@@ -82,11 +82,20 @@ func main() {
 }
 ```
 
-## Formats
+## Format
 
 ```go
+// using std time formats
+//
+// ANSIC, UnixDate, RubyDate, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339, RFC3339Nano,
+// Kitchen, Stamp, StampMilli, StampMicro, StampNano
+dt.Format(time.RubyDate)
+
+// Using custom format
 dt.Format("{YYYY}-{MMM}-{DD}") // eg: 2018-Jan-04
 ```
+
+## Custom Formats
 
 | Format | Meaning | Example  |
 | --- | --- | --- |

@@ -19,6 +19,7 @@ func TestFormat(t *testing.T) {
 	assertTrue(t, dt.Format("{z:} {z::}") == "-05:00 -05:00:00", "Format Test: TimeZone With Colon")
 	assertTrue(t, dt.Format("{Z}") == "EST", "Format Test: TimeZone Name")
 	assertTrue(t, dt.Format("{pm} {PM}") == "pm PM", "Format Test: Meridian")
+	assertTrue(t, dt.Format(time.RFC822) == "04 Feb 18 20:07 EST", "")
 	assertTrue(t, dt.DateTimeString() == "2018-02-04 20:07:05", "Formater Test: DateTimeString")
 	assertDateTime(t, dt, dt.String())
 }
@@ -32,4 +33,8 @@ func TestNonZero24HourFormat(t *testing.T) {
 	tm = time.Date(2018, time.February, 4, 9, 7, 5, 9, time.UTC)
 	dt = New(tm)
 	assertTrue(t, dt.Format("{HH} {H}") == "09 9", "Test: HH H With 09hr")
+}
+
+func TestIsStdFormat(t *testing.T) {
+	assertTrue(t, isStdFormat(time.RFC1123), "")
 }
