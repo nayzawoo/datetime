@@ -55,6 +55,12 @@ func (dt *DateTime) Nanosecond() int {
 	return dt.Time().Nanosecond()
 }
 
+// Unix returns t as a Unix time, the number of seconds elapsed
+// since January 1, 1970 UTC.
+func (dt *DateTime) Unix() int64 {
+	return dt.Time().Unix()
+}
+
 // Weekday returns a number between 0 (sunday) and 6 (saturday)
 func (dt *DateTime) Weekday() int {
 	return int(dt.Time().Weekday())

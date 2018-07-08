@@ -46,6 +46,9 @@ func TestCopy(t *testing.T) {
 func TestNewFromFormatWithDate(t *testing.T) {
 	dt, _ := NewFromFormat("{YY}-{M}-{D} {H}:{m}:{s}", "18-2-3 10:20:30", time.UTC)
 	assertDateTime(t, dt, "2018-02-03 10:20:30")
+
+	dt, _ = NewFromFormat("{YY}-{M}-{D} {H}:{m}:{s}", "18-2-3 10:20:30", nil)
+	assertDateTime(t, dt, "2018-02-03 10:20:30")
 }
 
 func TestNewFromDate(t *testing.T) {
@@ -62,6 +65,13 @@ func TestNewFromFormatWithTime(t *testing.T) {
 	}
 
 	assertTrue(t, dt.Format("{HH}:{mm}:{ss}") == "13:02:03", "test time 13:02:03")
+}
+
+func TestUnix(t *testing.T) {
+	dt := Unix(3600, 0)
+
+	assertDateTime(t, dt.In(time.UTC), "1970-01-01 01:00:00")
+	assertDateTime(t, dt.UTC(), "1970-01-01 01:00:00")
 }
 
 func TestStartOfs(t *testing.T) {
@@ -238,4 +248,12 @@ func TestDiffs(t *testing.T) {
 	tenMinLater := NewFromDate(2017, 2, 1, time.UTC).AddMinutes(10)
 
 	assertTrue(t, dt.Diff(tenMinLater).Minutes() == -10, "")
+}
+
+func TestIs(t *testing.T) {
+	dt := NewFromDate(2017, 2, 1, time.UTC)
+	assertTrue(t, !dt.IsLeapYear(), "")
+
+	dt = NewFromDate(2000, 2, 1, time.UTC)
+	assertTrue(t, dt.IsLeapYear(), "")
 }

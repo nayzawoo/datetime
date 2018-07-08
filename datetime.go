@@ -83,6 +83,23 @@ func NewFromDate(year, month, day int, loc *time.Location) *DateTime {
 	return New(t)
 }
 
+// Unix returns the local Time corresponding to the given Unix time
+func Unix(sec int64, nsec int64) *DateTime {
+	t := time.Unix(sec, nsec)
+	return New(t)
+}
+
+// In set current location to given location
+func (dt *DateTime) In(loc *time.Location) *DateTime {
+	dt.t = dt.Time().In(loc)
+	return dt
+}
+
+// UTC set current location to UTC
+func (dt *DateTime) UTC() *DateTime {
+	return dt.In(time.UTC)
+}
+
 // Copy return new datetime
 func (dt *DateTime) Copy() *DateTime {
 	return New(dt.Time())
@@ -327,4 +344,10 @@ func (dt *DateTime) Gte(u *DateTime) bool {
 // will be returned.
 func (dt *DateTime) Diff(u *DateTime) time.Duration {
 	return dt.Time().Sub(u.Time())
+}
+
+// IsLeapYear determine if current year is leap year
+func (dt *DateTime) IsLeapYear() bool {
+	year := dt.Year()
+	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
 }
