@@ -30,11 +30,11 @@ func Now(loc *time.Location) *DateTime {
 	if HasTestNow() {
 		t = *testNow
 	} else {
-		if loc == nil {
-			t = time.Now()
-		} else {
-			t = time.Now().In(loc)
-		}
+		t = time.Now()
+	}
+
+	if loc != nil {
+		t = t.In(loc)
 	}
 
 	return New(t)
@@ -60,7 +60,14 @@ func NewFromFormat(format, value string, loc *time.Location) (*DateTime, error) 
 	layout := formatToStdLayout(format)
 	layout = fixLayoutFor24Hour(layout)
 
-	t, err := time.Parse(layout, value)
+	var t time.Time
+	var err error
+
+	if loc == nil {
+		t, err = time.Parse(layout, value)
+	} else {
+		t, err = time.ParseInLocation(layout, value, loc)
+	}
 
 	return New(t), err
 }
@@ -68,7 +75,7 @@ func NewFromFormat(format, value string, loc *time.Location) (*DateTime, error) 
 // NewFromDate -
 func NewFromDate(year, month, day int, loc *time.Location) *DateTime {
 	if loc == nil {
-		loc = time.UTC
+		loc = time.Local
 	}
 
 	t := time.Date(year, time.Month(month), day, 0, 0, 0, 0, loc)
