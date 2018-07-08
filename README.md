@@ -34,6 +34,7 @@ func main() {
     dt.Minute() // 20
     dt.Second() // 30
     dt.Nanosecond() // 40
+    dt.Unix() // 1517653230
     dt.Weekday() // 6
     dt.YearDay() // 34
     dt.DaysInMonth() // 28
