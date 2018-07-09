@@ -69,7 +69,7 @@ func Format(t time.Time, format string) string {
 }
 
 // Format returns datetime string according to given format
-func (dt *DateTime) Format(format string) string {
+func (dt DateTime) Format(format string) string {
 	t := dt.Time()
 	return Format(t, format)
 }
@@ -89,7 +89,7 @@ func fixLayoutFor24Hour(layout string) string {
 }
 
 // DateTimeString returns datetime simple format eg: 2016-01-02 15:04:05
-func (dt *DateTime) DateTimeString() string {
+func (dt DateTime) DateTimeString() string {
 	return dt.Time().Format("2006-01-02 15:04:05")
 }
 

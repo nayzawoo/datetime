@@ -36,8 +36,8 @@ func TestCopy(t *testing.T) {
 	dt2 := dt.Copy()
 
 	// Modify
-	dt.StartOfMonth()
-	dt2.AddDate(1, 0, 0)
+	dt = dt.StartOfMonth()
+	dt2 = dt2.AddDate(1, 0, 0)
 
 	assertDateTime(t, dt, "2018-12-01 00:00:00")
 	assertDateTime(t, dt2, "2019-12-10 00:00:00")
@@ -78,33 +78,29 @@ func TestStartOfs(t *testing.T) {
 	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 
 	dt := New(tTime)
-	dt.StartOfMinute()
 
 	// minute
+	dt = dt.StartOfMinute()
 	assertDateTime(t, dt, "2016-02-03 10:20:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// hour
-	dt.t = tTime
-	dt.StartOfHour()
+	dt = dt.StartOfHour()
 	assertDateTime(t, dt, "2016-02-03 10:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// day
-	dt.t = tTime
-	dt.StartOfDay()
+	dt = dt.StartOfDay()
 	assertDateTime(t, dt, "2016-02-03 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// month
-	dt.t = tTime
-	dt.StartOfMonth()
+	dt = dt.StartOfMonth()
 	assertDateTime(t, dt, "2016-02-01 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 
 	// year
-	dt.t = tTime
-	dt.StartOfYear()
+	dt = dt.StartOfYear()
 	assertDateTime(t, dt, "2016-01-01 00:00:00")
 	assertTrue(t, dt.Nanosecond() == 0, "")
 }
@@ -113,30 +109,28 @@ func TestEndOfs(t *testing.T) {
 	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 	dt := New(tTime)
 
-	dt.EndOfMinute()
+	dt = dt.EndOfMinute()
 	assertDateTime(t, dt, "2016-02-03 10:20:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	// hour
-	dt.t = tTime
-	dt.EndOfHour()
+	dt = dt.EndOfHour()
 	assertDateTime(t, dt, "2016-02-03 10:59:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	// day
-	dt.t = tTime
-	dt.EndOfDay()
+	dt = dt.EndOfDay()
 	assertDateTime(t, dt, "2016-02-03 23:59:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	// month
 	dt = NewFromDate(2017, 2, 1, time.UTC)
-	dt.EndOfMonth()
+	dt = dt.EndOfMonth()
 	assertDateTime(t, dt, "2017-02-28 23:59:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
 	dt = NewFromDate(2000, 2, 1, time.UTC)
-	dt.EndOfMonth()
+	dt = dt.EndOfMonth()
 	assertDateTime(t, dt, "2000-02-29 23:59:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
@@ -145,7 +139,7 @@ func TestEndOfs(t *testing.T) {
 
 	// year
 	dt = NewFromDate(2017, 2, 1, time.UTC)
-	dt.EndOfYear()
+	dt = dt.EndOfYear()
 	assertDateTime(t, dt, "2017-12-31 23:59:59")
 	assertTrue(t, dt.Nanosecond() == 999999999, "")
 
@@ -155,55 +149,55 @@ func TestAddSubTime(t *testing.T) {
 	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 	dt := New(tTime)
 
-	dt.AddTime(-10, -20, -30)
+	dt = dt.AddTime(-10, -20, -30)
 	assertDateTime(t, dt, "2016-02-03 00:00:00")
 
-	dt.AddTime(10, 20, 30)
+	dt = dt.AddTime(10, 20, 30)
 	assertDateTime(t, dt, "2016-02-03 10:20:30")
 
-	dt.SubTime(2, 5, 10)
+	dt = dt.SubTime(2, 5, 10)
 	assertDateTime(t, dt, "2016-02-03 08:15:20")
 
-	dt.Add(time.Second * 10)
+	dt = dt.Add(time.Second * 10)
 	assertDateTime(t, dt, "2016-02-03 08:15:30")
 
-	dt.AddSeconds(10)
+	dt = dt.AddSeconds(10)
 	assertDateTime(t, dt, "2016-02-03 08:15:40")
 
-	dt.AddMinutes(5)
+	dt = dt.AddMinutes(5)
 	assertDateTime(t, dt, "2016-02-03 08:20:40")
 
-	dt.AddHours(2)
+	dt = dt.AddHours(2)
 	assertDateTime(t, dt, "2016-02-03 10:20:40")
 
-	dt.AddDays(1)
+	dt = dt.AddDays(1)
 	assertDateTime(t, dt, "2016-02-04 10:20:40")
 
-	dt.AddMonths(1)
+	dt = dt.AddMonths(1)
 	assertDateTime(t, dt, "2016-03-04 10:20:40")
 
-	dt.AddYears(1)
+	dt = dt.AddYears(1)
 	assertDateTime(t, dt, "2017-03-04 10:20:40")
 
-	dt.SubSeconds(10)
+	dt = dt.SubSeconds(10)
 	assertDateTime(t, dt, "2017-03-04 10:20:30")
 
-	dt.SubMinutes(10)
+	dt = dt.SubMinutes(10)
 	assertDateTime(t, dt, "2017-03-04 10:10:30")
 
-	dt.SubHours(10)
+	dt = dt.SubHours(10)
 	assertDateTime(t, dt, "2017-03-04 00:10:30")
 
-	dt.SubDays(1)
+	dt = dt.SubDays(1)
 	assertDateTime(t, dt, "2017-03-03 00:10:30")
 
-	dt.SubMonths(1)
+	dt = dt.SubMonths(1)
 	assertDateTime(t, dt, "2017-02-03 00:10:30")
 
-	dt.SubYears(1)
+	dt = dt.SubYears(1)
 	assertDateTime(t, dt, "2016-02-03 00:10:30")
 
-	dt.Sub(time.Second * 20)
+	dt = dt.Sub(time.Second * 20)
 	assertDateTime(t, dt, "2016-02-03 00:10:10")
 
 }
@@ -212,10 +206,10 @@ func TestAddSubDate(t *testing.T) {
 	tTime := time.Date(2016, 2, 3, 10, 20, 30, 40, time.UTC)
 	dt := New(tTime)
 
-	dt.AddDate(2, 1, 2)
+	dt = dt.AddDate(2, 1, 2)
 	assertDateTime(t, dt, "2018-03-05 10:20:30")
 
-	dt.SubDate(2, 1, 2)
+	dt = dt.SubDate(2, 1, 2)
 	assertDateTime(t, dt, "2016-02-03 10:20:30")
 }
 
@@ -228,7 +222,7 @@ func TestComparisons(t *testing.T) {
 
 	assertTrue(t, !dt.Eq(dt2), "")
 
-	dt.AddTime(5, 0, 0)
+	dt = dt.AddTime(5, 0, 0)
 	assertTrue(t, dt.Eq(dt2), "")
 
 	// Lt
