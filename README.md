@@ -17,75 +17,71 @@ import (
 	"time"
 )
 
-func main() {
-	datetime.Now(nil)
-	datetime.NewFromFormat("{YYYY}-{M}-{D}", "2018-2-3", time.UTC)
-	year2000 := datetime.NewFromDate(2000, 1, 1, time.UTC)
-	year3000 := datetime.NewFromDate(3000, 1, 1, time.UTC)
+datetime.Now(nil)
+datetime.NewFromFormat("{YYYY}-{M}-{D}", "2018-2-3", time.UTC)
+year2000 := datetime.NewFromDate(2000, 1, 1, time.UTC)
+year3000 := datetime.NewFromDate(3000, 1, 1, time.UTC)
 
-	t := time.Date(2018, 2, 3, 10, 20, 30, 40, time.UTC)
-	dt := datetime.New(t)
+t := time.Date(2018, 2, 3, 10, 20, 30, 40, time.UTC)
+dt := datetime.New(t)
 
-	dt.DateTimeString() // 2018-02-03 10:20:30
-	dt.Year() // 2018
-	dt.Month() // 2
-	dt.Day() // 3
-	dt.Hour() // 10
-	dt.Minute() // 20
-	dt.Second() // 30
-	dt.Nanosecond() // 40
-	dt.Unix() // 1517653230
-	dt.Weekday() // 6
-	dt.YearDay() // 34
-	dt.DaysInMonth() // 28
-	dt.DaysInYear() // 365
-	dt.Clock() // [10 20 30]
-	dt.Date() // [2018 February 3]
-	dt.Time() // https://golang.org/pkg/time/#Time
+dt.DateTimeString() // 2018-02-03 10:20:30
+dt.Year() // 2018
+dt.Month() // 2
+dt.Day() // 3
+dt.Hour() // 10
+dt.Minute() // 20
+dt.Second() // 30
+dt.Nanosecond() // 40
+dt.Unix() // 1517653230
+dt.Weekday() // 6
+dt.YearDay() // 34
+dt.DaysInMonth() // 28
+dt.DaysInYear() // 365
+dt.Clock() // [10 20 30]
+dt.Date() // [2018 February 3]
+dt.Time() // https://golang.org/pkg/time/#Time
 
-	year2000.Eq(year2000) // true
-	year2000.Lt(year2000) // false
-	year2000.Lte(year2000) // true
-	year3000.Gt(year2000) // true
-	year3000.Gte(year2000) // true
-	year3000.Diff(year2000) // time.Duration
+year2000.Eq(year2000) // true
+year2000.Lt(year2000) // false
+year2000.Lte(year2000) // true
+year3000.Gt(year2000) // true
+year3000.Gte(year2000) // true
+year3000.Diff(year2000) // time.Duration
 
-	dt.EndOfMinute() // 2018-02-03 10:20:59
-	dt.EndOfHour() // 2018-02-03 10:59:59
-	dt.EndOfDay() // 2018-02-03 23:59:59
-	dt.EndOfMonth() // 2018-02-28 23:59:59
-	dt.EndOfYear() // 2018-12-31 23:59:59
+dt.EndOfMinute() // 2018-02-03 10:20:59
+dt.EndOfHour() // 2018-02-03 10:59:59
+dt.EndOfDay() // 2018-02-03 23:59:59
+dt.EndOfMonth() // 2018-02-28 23:59:59
+dt.EndOfYear() // 2018-12-31 23:59:59
 
-	dt.StartOfMinute() // 2018-02-03 10:20:00
-	dt.StartOfHour() // 2018-02-03 10:00:00
-	dt.StartOfDay() // 2018-02-03 00:00:00
-	dt.StartOfMonth() // 2018-02-01 00:00:00
-	dt.StartOfYear() // 2018-01-01 00:00:00
+dt.StartOfMinute() // 2018-02-03 10:20:00
+dt.StartOfHour() // 2018-02-03 10:00:00
+dt.StartOfDay() // 2018-02-03 00:00:00
+dt.StartOfMonth() // 2018-02-01 00:00:00
+dt.StartOfYear() // 2018-01-01 00:00:00
 
-	dt.Add(time.Second * 10) // 2018-02-03 10:20:40
-	dt.Sub(time.Second * 10) // 2018-02-03 10:20:20
-	dt.AddTime(5, 10, 15) // 2018-02-03 15:30:45
-	dt.SubTime(5, 10, 15) // 2018-02-03 05:10:15
-	dt.AddDate(1, 2, 3) // 2019-04-06 10:20:30
-	dt.SubDate(1, 2, 3) // 2016-11-30 10:20:30
-	dt.AddSeconds(10) // 2018-02-03 10:20:40
-	dt.SubSeconds(10) // 2018-02-03 10:20:20
-	dt.AddMinutes(10) // 2018-02-03 10:30:30
-	dt.SubMinutes(10) // 2018-02-03 10:10:30
-	dt.AddHours(10) // 2018-02-03 20:20:30
-	dt.SubHours(10) // 2018-02-03 00:20:30
-	dt.AddDays(1) // 2018-02-04 10:20:30
-	dt.SubDays(1) // 2018-02-02 10:20:30
-	dt.AddMonths(1) // 2018-03-03 10:20:30
-	dt.SubMonths(1) // 2018-01-03 10:20:30
-	dt.AddYears(1) // 2019-02-03 10:20:30
-	dt.SubYears(1) // 2017-02-03 10:20:30
+dt.Add(time.Second * 10) // 2018-02-03 10:20:40
+dt.Sub(time.Second * 10) // 2018-02-03 10:20:20
+dt.AddTime(5, 10, 15) // 2018-02-03 15:30:45
+dt.SubTime(5, 10, 15) // 2018-02-03 05:10:15
+dt.AddDate(1, 2, 3) // 2019-04-06 10:20:30
+dt.SubDate(1, 2, 3) // 2016-11-30 10:20:30
+dt.AddSeconds(10) // 2018-02-03 10:20:40
+dt.SubSeconds(10) // 2018-02-03 10:20:20
+dt.AddMinutes(10) // 2018-02-03 10:30:30
+dt.SubMinutes(10) // 2018-02-03 10:10:30
+dt.AddHours(10) // 2018-02-03 20:20:30
+dt.SubHours(10) // 2018-02-03 00:20:30
+dt.AddDays(1) // 2018-02-04 10:20:30
+dt.SubDays(1) // 2018-02-02 10:20:30
+dt.AddMonths(1) // 2018-03-03 10:20:30
+dt.SubMonths(1) // 2018-01-03 10:20:30
+dt.AddYears(1) // 2019-02-03 10:20:30
+dt.SubYears(1) // 2017-02-03 10:20:30
 
-	dt.In(time.UTC) // 2018-02-03 10:20:30
-	dt.UTC() // 2018-02-03 10:20:30
-
-}
-```
+dt.In(time.UTC) // 2018-02-03 10:20:30
+dt.UTC() // 2018-02-03 10:20:30
 
 ## Format
 
