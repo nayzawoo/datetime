@@ -10,8 +10,6 @@ go get github.com/nayzawoo/datetime
 ```
 
 ```go
-package main
-
 import (
 	"github.com/nayzawoo/datetime"
 	"time"
@@ -82,6 +80,7 @@ dt.SubYears(1) // 2017-02-03 10:20:30
 
 dt.In(time.UTC) // 2018-02-03 10:20:30
 dt.UTC() // 2018-02-03 10:20:30
+```
 
 ## Format
 
