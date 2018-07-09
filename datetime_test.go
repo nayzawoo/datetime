@@ -30,19 +30,6 @@ func TestNow(t *testing.T) {
 	assertTrue(t, utc.Eq(newYorkTime), "")
 }
 
-func TestCopy(t *testing.T) {
-	dt := NewFromDate(2018, 12, 10, nil)
-
-	dt2 := dt.Copy()
-
-	// Modify
-	dt = dt.StartOfMonth()
-	dt2 = dt2.AddDate(1, 0, 0)
-
-	assertDateTime(t, dt, "2018-12-01 00:00:00")
-	assertDateTime(t, dt2, "2019-12-10 00:00:00")
-}
-
 func TestNewFromFormatWithDate(t *testing.T) {
 	dt, _ := NewFromFormat("{YY}-{M}-{D} {H}:{m}:{s}", "18-2-3 10:20:30", time.UTC)
 	assertDateTime(t, dt, "2018-02-03 10:20:30")

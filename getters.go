@@ -79,10 +79,10 @@ func (dt DateTime) Time() time.Time {
 
 // DaysInMonth returns the number of days in a current month
 func (dt DateTime) DaysInMonth() int {
-	return dt.Copy().EndOfMonth().Day()
+	return dt.EndOfMonth().Day()
 }
 
 // DaysInYear returns the number of days in a current year
 func (dt DateTime) DaysInYear() int {
-	return dt.Copy().EndOfYear().YearDay()
+	return dt.EndOfYear().YearDay()
 }
