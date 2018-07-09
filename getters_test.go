@@ -18,6 +18,7 @@ func TestYearToNanoSecond(t *testing.T) {
 	assertTrue(t, dt.Weekday() == 0, "Weekday => 1(Sun)")
 	assertTrue(t, dt.YearDay() == 35, "DayOfYear => 35")
 	assertTrue(t, dt.Unix() == 1517775005, "")
+	assertTrue(t, dt.UnixNano() > 1517775005*1e9, "")
 
 	y, m, d := dt.Date()
 
