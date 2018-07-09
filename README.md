@@ -1,7 +1,8 @@
 # DateTime
 [![Build Status](https://travis-ci.org/nayzawoo/datetime.svg?branch=master)](https://travis-ci.org/nayzawoo/datetime)
 [![codecov](https://codecov.io/gh/nayzawoo/datetime/branch/master/graph/badge.svg)](https://codecov.io/gh/nayzawoo/datetime)
-[![Go Report Card](https://goreportcard.com/badge/github.com/nayzawoo/datetime)](https://goreportcard.com/report/github.com/nayzawoo/datetime)
+
+<!-- [![Go Report Card](https://goreportcard.com/badge/github.com/nayzawoo/datetime)](https://goreportcard.com/report/github.com/nayzawoo/datetime) -->
 
 ## Installation
 
@@ -36,6 +37,8 @@ dt.Weekday() // 6
 dt.YearDay() // 34
 dt.DaysInMonth() // 28
 dt.DaysInYear() // 365
+dt.Location() // UTC
+dt.IsLeapYear() // false
 dt.Clock() // [10 20 30]
 dt.Date() // [2018 February 3]
 dt.Time() // https://golang.org/pkg/time/#Time
