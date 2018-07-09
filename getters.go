@@ -14,12 +14,12 @@ func (dt DateTime) Date() (year int, month time.Month, day int) {
 	return dt.Time().Date()
 }
 
-// Clock returns the hour, minute, and second within the day specified by t.
+// Clock returns the hour, minute, and second within the day specified by dt
 func (dt DateTime) Clock() (hour, min, sec int) {
 	return dt.Time().Clock()
 }
 
-// Year => ..2018..
+// Year returns the year of dt
 func (dt DateTime) Year() int {
 	return dt.Time().Year()
 }
@@ -59,6 +59,12 @@ func (dt DateTime) Nanosecond() int {
 // since January 1, 1970 UTC.
 func (dt DateTime) Unix() int64 {
 	return dt.Time().Unix()
+}
+
+// UnixNano returns t as a Unix time, the number of nanoseconds elapsed
+// since January 1, 1970 UTC.
+func (dt DateTime) UnixNano() int64 {
+	return dt.Time().UnixNano()
 }
 
 // Weekday returns a number between 0 (sunday) and 6 (saturday)

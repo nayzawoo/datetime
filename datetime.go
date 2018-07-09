@@ -9,13 +9,13 @@ var (
 	testNow *time.Time
 )
 
-// DateTime Wrapper Like Carbon, Moment, DaysJS
+// DateTime Utils
 type DateTime struct {
 	t              time.Time
 	formatReplacer strings.Replacer
 }
 
-// New : Build
+// New return new datetime
 func New(t time.Time) DateTime {
 	dt := DateTime{
 		t: t,
@@ -40,22 +40,22 @@ func Now(loc *time.Location) DateTime {
 	return New(t)
 }
 
-// SetTestNow set current for testing
+// SetTestNow set current time for testing
 func SetTestNow(t time.Time) {
 	testNow = &t
 }
 
-// HasTestNow check if mocking current time
+// HasTestNow check if has testNow
 func HasTestNow() bool {
 	return testNow != nil
 }
 
-// ResetTestNow reset current for testing
+// ResetTestNow reset current time for testing
 func ResetTestNow() {
 	testNow = nil
 }
 
-// NewFromFormat parses date and returns DatetimeObject
+// NewFromFormat parses date and returns datetime
 func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
 	layout := formatToStdLayout(format)
 	layout = fixLayoutFor24Hour(layout)
@@ -72,7 +72,7 @@ func NewFromFormat(format, value string, loc *time.Location) (DateTime, error) {
 	return New(t), err
 }
 
-// NewFromDate returns datetime from givem y,m,d
+// NewFromDate returns datetime corresponding to the given givem y,m,d
 func NewFromDate(year, month, day int, loc *time.Location) DateTime {
 	if loc == nil {
 		loc = time.Local
@@ -110,14 +110,14 @@ func (dt DateTime) String() string {
 	return dt.DateTimeString()
 }
 
-// StartOfMinute returns 00s 0ns of current time
+// StartOfMinute returns 00s 0ns of datetime
 func (dt DateTime) StartOfMinute() DateTime {
 	t := dt.Time().Truncate(time.Minute)
 	dt.setTime(t)
 	return dt
 }
 
-// StartOfHour returns 00m:00s 0ns of current time
+// StartOfHour returns 00m:00s 0ns of datetime
 func (dt DateTime) StartOfHour() DateTime {
 	y, m, d := dt.Date()
 	t := time.Date(y, m, d, dt.Hour(), 0, 0, 0, dt.Location())
@@ -125,7 +125,7 @@ func (dt DateTime) StartOfHour() DateTime {
 	return dt
 }
 
-// StartOfDay returns 00h:00m:00s 0ns of current time
+// StartOfDay returns 00h:00m:00s 0ns of datetime
 func (dt DateTime) StartOfDay() DateTime {
 	y, m, d := dt.Date()
 	t := time.Date(y, m, d, 0, 0, 0, 0, dt.Location())
@@ -133,7 +133,7 @@ func (dt DateTime) StartOfDay() DateTime {
 	return dt
 }
 
-// StartOfMonth returns
+// StartOfMonth returns 1st day 00h:00m:00s 0ns of datetime
 func (dt DateTime) StartOfMonth() DateTime {
 	y, m, _ := dt.Date()
 	t := time.Date(y, m, 1, 0, 0, 0, 0, dt.Location())
@@ -141,14 +141,14 @@ func (dt DateTime) StartOfMonth() DateTime {
 	return dt
 }
 
-// StartOfYear returns
+// StartOfYear returns Jan 1 00h:00m:00s 0ns of datetime
 func (dt DateTime) StartOfYear() DateTime {
 	t := time.Date(dt.Year(), 1, 1, 0, 0, 0, 0, dt.Location())
 	dt.setTime(t)
 	return dt
 }
 
-// EndOfMinute returns
+// EndOfMinute returns 59s of datetime
 func (dt DateTime) EndOfMinute() DateTime {
 	dt = dt.StartOfMinute()
 	t := dt.Time().Add(time.Minute - time.Nanosecond)
@@ -156,7 +156,7 @@ func (dt DateTime) EndOfMinute() DateTime {
 	return dt
 }
 
-// EndOfHour returns
+// EndOfHour returns 59m:59s of datetime
 func (dt DateTime) EndOfHour() DateTime {
 	dt = dt.StartOfHour()
 	t := dt.Time().Add(time.Hour - time.Nanosecond)
@@ -164,7 +164,7 @@ func (dt DateTime) EndOfHour() DateTime {
 	return dt
 }
 
-// EndOfDay returns
+// EndOfDay returns 23hr:59m:59s of datetime
 func (dt DateTime) EndOfDay() DateTime {
 	y, m, d := dt.Date()
 	t := time.Date(y, m, d+1, 0, 0, 0, 0, dt.Location()).Add(-time.Nanosecond)
@@ -172,7 +172,7 @@ func (dt DateTime) EndOfDay() DateTime {
 	return dt
 }
 
-// EndOfMonth returns
+// EndOfMonth returns start of next months - 1ns
 func (dt DateTime) EndOfMonth() DateTime {
 	y, m, _ := dt.Date()
 	t := time.Date(y, m+1, 1, 0, 0, 0, 0, dt.Location()).Add(-time.Nanosecond)
@@ -180,7 +180,7 @@ func (dt DateTime) EndOfMonth() DateTime {
 	return dt
 }
 
-// EndOfYear returns
+// EndOfYear returns start of next year - 1ns
 func (dt DateTime) EndOfYear() DateTime {
 	t := time.Date(dt.Year()+1, 1, 1, 0, 0, 0, 0, dt.Location()).Add(-time.Nanosecond)
 	dt.setTime(t)
