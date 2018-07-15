@@ -59,6 +59,9 @@ func TestUnix(t *testing.T) {
 
 	assertDateTime(t, dt.In(time.UTC), "1970-01-01 01:00:00")
 	assertDateTime(t, dt.UTC(), "1970-01-01 01:00:00")
+
+	// @todo mock local time
+	assertTrue(t, dt.Local().Eq(dt), "")
 }
 
 func TestStartOfs(t *testing.T) {
