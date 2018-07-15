@@ -101,6 +101,11 @@ func (dt DateTime) In(loc *time.Location) DateTime {
 	return dt
 }
 
+// Local returns t with the location set to local time.
+func (dt DateTime) Local() DateTime {
+	return dt.In(time.Local)
+}
+
 // UTC set current location to UTC
 func (dt DateTime) UTC() DateTime {
 	return dt.In(time.UTC)
